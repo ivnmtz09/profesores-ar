@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <!-- Configuración del viewport para que la página se adapte a móviles -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profesores de Sistemas - Uniguajira</title>
+
+  <!-- Hoja de estilos del proyecto -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============================================================= -->
+  <!-- HEADER: Encabezado con título del proyecto e instrucciones     -->
+  <!-- ============================================================= -->
+  <header>
+    <h1>Profesores de Sistemas</h1>
+    <p>Universidad de La Guajira — Realidad Aumentada</p>
+    <p>
+      Escanea el código QR de una tarjeta o selecciona un docente
+      para ver su modelo 3D en Realidad Aumentada
+    </p>
+  </header>
+
+  <!-- ============================================================= -->
+  <!-- GALERÍA: Tarjetas de los 5 docentes                           -->
+  <!-- Cada tarjeta tiene: foto, nombre, materia, y botón "Ver en AR"-->
+  <!-- El botón enlaza a ar.html?id=docente-N para identificar       -->
+  <!-- qué target, modelo y datos cargar.                            -->
+  <!-- ============================================================= -->
+  <main class="gallery">
+
+    <!-- Docente 1 -->
+    <article class="card">
+      <img src="img/docente-1.jpg" alt="Foto del Prof. Juan Pérez">
+      <h3>Prof. Juan Pérez</h3>
+      <p>Redes y Telecomunicaciones</p>
+      <a href="ar.html?id=docente-1">Ver en AR 🎓</a>
+    </article>
+
+    <!-- Docente 2 -->
+    <article class="card">
+      <img src="img/docente-2.jpg" alt="Foto de la Prof. María García">
+      <h3>Prof. María García</h3>
+      <p>Programación Orientada a Objetos</p>
+      <a href="ar.html?id=docente-2">Ver en AR 🎓</a>
+    </article>
+
+    <!-- Docente 3 -->
+    <article class="card">
+      <img src="img/docente-3.jpg" alt="Foto del Prof. Carlos López">
+      <h3>Prof. Carlos López</h3>
+      <p>Bases de Datos</p>
+      <a href="ar.html?id=docente-3">Ver en AR 🎓</a>
+    </article>
+
+    <!-- Docente 4 -->
+    <article class="card">
+      <img src="img/docente-4.jpg" alt="Foto de la Prof. Ana Martínez">
+      <h3>Prof. Ana Martínez</h3>
+      <p>Sistemas Operativos</p>
+      <a href="ar.html?id=docente-4">Ver en AR 🎓</a>
+    </article>
+
+    <!-- Docente 5 -->
+    <article class="card">
+      <img src="img/docente-5.jpg" alt="Foto del Prof. Luis Rodríguez">
+      <h3>Prof. Luis Rodríguez</h3>
+      <p>Internet de las Cosas (IoT)</p>
+      <a href="ar.html?id=docente-5">Ver en AR 🎓</a>
+    </article>
+
+  </main>
+
+  <!-- ============================================================= -->
+  <!-- FOOTER: Créditos del proyecto                                 -->
+  <!-- ============================================================= -->
+  <footer>
+    <p>Proyecto IoT — Universidad de La Guajira — 2025</p>
+  </footer>
+
+</body>
+</html>

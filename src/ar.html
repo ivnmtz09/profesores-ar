@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <!-- Viewport para móviles. user-scalable=no evita zoom accidental en AR -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>AR — Profesores de Sistemas</title>
+
+  <!-- Hoja de estilos del proyecto -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============================================================= -->
+  <!-- OVERLAY DE CARGA                                              -->
+  <!-- Se muestra mientras se inicializan la cámara, MindAR,         -->
+  <!-- el modelo 3D y los datos del docente. Se oculta cuando        -->
+  <!-- todo está listo (ar-init.js le agrega la clase 'hidden').     -->
+  <!-- ============================================================= -->
+  <div id="loading-overlay">
+    <div class="spinner"></div>
+    <p>Cargando experiencia AR...</p>
+    <p><small>Por favor, permite el acceso a la cámara</small></p>
+  </div>
+
+  <!-- ============================================================= -->
+  <!-- CONTENEDOR AR                                                 -->
+  <!-- MindAR crea automáticamente el elemento <video> y el <canvas> -->
+  <!-- de Three.js dentro de este contenedor. Ocupa toda la pantalla.-->
+  <!-- ============================================================= -->
+  <div id="ar-container"></div>
+
+  <!-- ============================================================= -->
+  <!-- BOTÓN "VOLVER"                                                -->
+  <!-- Enlace fijo en la esquina superior izquierda para regresar    -->
+  <!-- a la landing page (index.html).                               -->
+  <!-- ============================================================= -->
+  <a href="index.html" class="btn-back">← Volver</a>
+
+  <!-- ============================================================= -->
+  <!-- BOTÓN "INFO DOCENTE"                                          -->
+  <!-- Aparece flotando cuando MindAR detecta el target.             -->
+  <!-- Al hacer clic, muestra la ficha flotante con los datos.       -->
+  <!-- Se oculta con la clase 'hidden' (controlado desde ar-init.js) -->
+  <!-- ============================================================= -->
+  <button id="btn-info" class="btn-info hidden">ℹ️ Info Docente</button>
+
+  <!-- ============================================================= -->
+  <!-- FICHA FLOTANTE DEL DOCENTE                                    -->
+  <!-- Panel deslizante desde abajo con la información del docente.  -->
+  <!-- Los datos se rellenan dinámicamente desde ficha.js.           -->
+  <!-- Se muestra/oculta con la clase 'visible' (animación CSS).     -->
+  <!-- ============================================================= -->
+  <div id="ficha-overlay" class="ficha">
+    <!-- Encabezado: nombre y materia -->
+    <div class="ficha-header">
+      <h2 id="ficha-nombre">Cargando...</h2>
+      <p id="ficha-materia"></p>
+    </div>
+    <!-- Cuerpo: datos de contacto y descripción -->
+    <div class="ficha-body">
+      <p id="ficha-email"></p>
+      <p id="ficha-oficina"></p>
+      <p id="ficha-semestre"></p>
+      <p id="ficha-descripcion"></p>
+    </div>
+    <!-- Botón para cerrar la ficha -->
+    <button id="ficha-close">Cerrar</button>
+  </div>
+
+  <!-- ============================================================= -->
+  <!-- SCRIPTS                                                       -->
+  <!-- Orden de carga:                                               -->
+  <!-- 1. Import map de Three.js (define rutas de módulos)           -->
+  <!-- 2. MindAR (script global, no es módulo ES)                    -->
+  <!-- 3. Nuestros módulos: firebase → ficha → ar-init               -->
+  <!-- ============================================================= -->
+
+  <!-- Mapa de importaciones para Three.js v0.170.0 -->
+  <!-- Esto permite usar 'import * as THREE from "three"' en los     -->
+  <!-- archivos .js sin necesidad de bundlers como Webpack            -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <!-- MindAR: librería de tracking de imágenes integrada con Three.js -->
+  <!-- Se carga como script global (no soporta ES modules)             -->
+  <!-- Expone window.MINDAR.IMAGE.MindARThree                          -->
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"></script>
+
+  <!-- Nuestros módulos de la aplicación -->
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/ficha.js"></script>
+  <script type="module" src="js/ar-init.js"></script>
+
+</body>
+</html>
