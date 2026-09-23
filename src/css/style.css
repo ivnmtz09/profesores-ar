@@ -9,15 +9,22 @@
    Box-sizing border-box facilita el cálculo de anchos/altos.
    ============================================================= */
 :root {
-  --color-primary: #1a237e;       /* Azul oscuro institucional */
-  --color-secondary: #00bcd4;     /* Cian / turquesa para acentos */
+  --color-primary: #0d47a1;       /* Azul institucional profundo */
+  --color-primary-light: #1565c0; /* Azul ligeramente más claro para hovers */
+  --color-secondary: #00acc1;     /* Cian vibrante para acentos */
+  --color-secondary-dark: #00838f;/* Cian oscuro para hover de botones */
   --color-accent: #ff9800;        /* Naranja para llamados a acción */
-  --color-bg: #f5f5f5;            /* Fondo general gris claro */
+  --color-bg: #f0f4f8;            /* Fondo azul-gris muy sutil */
   --color-card: #ffffff;          /* Fondo de las tarjetas */
-  --color-text: #333333;          /* Color de texto principal */
+  --color-text: #263238;          /* Texto principal (gris azulado oscuro) */
   --color-text-light: #ffffff;    /* Texto sobre fondos oscuros */
-  --border-radius: 12px;          /* Radio de bordes redondeados */
-  --shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  --color-muted: #78909c;         /* Texto secundario / materia */
+  --border-radius: 16px;          /* Bordes más redondeados (moderno) */
+  --card-padding: 1.25rem;        /* Padding interno de tarjetas */
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.08),
+            0 8px 24px rgba(0, 0, 0, 0.06); /* Sombra suave multicapa */
+  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.1),
+                  0 16px 40px rgba(0, 0, 0, 0.1); /* Sombra al hover */
 }
 
 *,
@@ -39,22 +46,26 @@ body {
    Gradiente azul oscuro con texto blanco centrado.
    ============================================================= */
 header {
-  background: linear-gradient(135deg, var(--color-primary), #283593);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
   color: var(--color-text-light);
-  padding: 2rem;
+  padding: 2.5rem 2rem;
   text-align: center;
+  border-bottom: 3px solid var(--color-secondary);
 }
 
 header h1 {
   font-size: 2rem;
   margin: 0 0 0.5rem;
+  letter-spacing: -0.5px;
+  font-weight: 700;
 }
 
 header p {
   font-size: 1rem;
-  opacity: 0.9;
+  opacity: 0.88;
   max-width: 600px;
   margin: 0.5rem auto;
+  line-height: 1.5;
 }
 
 
@@ -78,55 +89,58 @@ header p {
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   overflow: hidden;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
 }
 
 /* Efecto hover: la tarjeta "flota" hacia arriba */
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
 }
 
 /* Foto del docente dentro de la tarjeta */
 .card img {
   width: 100%;
-  height: 200px;
+  height: 220px;
   object-fit: cover; /* Recorta la imagen para llenar el espacio */
 }
 
 /* Nombre del docente */
 .card h3 {
-  padding: 0 1rem;
-  margin: 0.75rem 0 0.25rem;
+  padding: 0 var(--card-padding);
+  margin: 1.25rem 0 0.25rem;
   color: var(--color-primary);
+  font-size: 1.25rem;
 }
 
 /* Materia que dicta */
 .card p {
-  padding: 0 1rem;
-  color: #666;
-  font-size: 0.9rem;
+  padding: 0 var(--card-padding);
+  color: var(--color-muted);
+  font-size: 0.95rem;
   flex-grow: 1; /* Empuja el botón hacia abajo */
+  margin-bottom: 0.5rem;
 }
 
 /* Botón "Ver en AR" dentro de la tarjeta */
 .card a {
   display: block;
-  margin: 1rem;
-  padding: 0.75rem;
+  margin: 0 var(--card-padding) var(--card-padding);
+  padding: 0.85rem;
   background: var(--color-secondary);
   color: var(--color-text-light);
   text-align: center;
   text-decoration: none;
   border-radius: 8px;
   font-weight: 600;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .card a:hover {
-  background: #00838f; /* Cian más oscuro al pasar el mouse */
+  background: var(--color-secondary-dark); /* Cian más oscuro al pasar el mouse */
+  transform: scale(1.02);
 }
 
 

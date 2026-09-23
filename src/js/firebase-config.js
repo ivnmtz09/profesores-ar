@@ -3,37 +3,35 @@
 // Configuración e inicialización de Firebase (Firestore)
 // =============================================================
 // Este archivo configura la conexión con Firebase usando el SDK
-// modular v9+. Las credenciales son placeholders que debes
-// reemplazar con las de tu proyecto de Firebase.
+// modular v9+. Como NO usamos un bundler (Webpack, Vite, etc.),
+// importamos directamente desde el CDN de Google.
 // =============================================================
 
 // -----------------------------------------------------------
-// Importamos las funciones necesarias del SDK de Firebase
-// desde el CDN oficial de Google.
+// IMPORTACIONES desde el CDN de Firebase
 // - initializeApp: crea la instancia de la app Firebase
 // - getFirestore: nos da acceso a la base de datos Firestore
-// No necesitamos instalar nada con npm, todo viene del CDN.
+//
+// NOTA: Usamos las URLs completas del CDN porque nuestro
+// proyecto es HTML + JS puro, sin empaquetador (bundler).
+// Si usaras Vite o Webpack, podrías usar "firebase/app".
 // -----------------------------------------------------------
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
 // -----------------------------------------------------------
 // CONFIGURACIÓN DE FIREBASE
-// ¡IMPORTANTE! Reemplaza TODOS estos valores con los de tu
-// proyecto. Los encuentras en la consola de Firebase:
-//   1. Ve a console.firebase.google.com
-//   2. Selecciona tu proyecto
-//   3. Configuración del proyecto (⚙️) > General
-//   4. En "Tus apps" > selecciona la app web
-//   5. Copia el objeto firebaseConfig
+// Estas son las credenciales de tu proyecto en Firebase.
+// Las obtuviste de: Consola Firebase > Configuración > Tu app web
 // -----------------------------------------------------------
 const firebaseConfig = {
-  apiKey:            "TU_API_KEY_AQUI",
-  authDomain:        "TU_PROYECTO.firebaseapp.com",
-  projectId:         "TU_PROJECT_ID_AQUI",
-  storageBucket:     "TU_PROYECTO.appspot.com",
-  messagingSenderId: "123456789",
-  appId:             "1:123456789:web:abcdef123456"
+  apiKey: "AIzaSyDKenpUdReC1dxH_9guZD5q_f84eNUL6-g",
+  authDomain: "profesores-ar-uniguajira.firebaseapp.com",
+  projectId: "profesores-ar-uniguajira",
+  storageBucket: "profesores-ar-uniguajira.firebasestorage.app",
+  messagingSenderId: "620169017707",
+  appId: "1:620169017707:web:0acce480c370fd1ece342e",
+  measurementId: "G-HSB4SPNN5E"
 };
 
 // -----------------------------------------------------------
@@ -44,6 +42,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// -----------------------------------------------------------
+// EXPORTACIÓN
 // Exportamos 'db' para que otros módulos (ficha.js) puedan
-// usarla para consultar la base de datos
+// importarla y hacer consultas a la base de datos Firestore.
+// Ejemplo en ficha.js: import { db } from './firebase-config.js';
+// -----------------------------------------------------------
 export { db };
