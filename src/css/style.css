@@ -1,207 +1,200 @@
 /* =============================================================
    style.css
    Estilos del proyecto "Profesores de Sistemas - Uniguajira AR"
+   DISEÑO NEO-BRUTALISTA
    ============================================================= */
 
-/* =============================================================
-   1. RESET Y VARIABLES GLOBALES
-   Definimos colores y valores reutilizables como variables CSS.
-   Box-sizing border-box facilita el cálculo de anchos/altos.
-   ============================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap');
+
 :root {
-  --color-primary: #0d47a1;       /* Azul institucional profundo */
-  --color-primary-light: #1565c0; /* Azul ligeramente más claro para hovers */
-  --color-secondary: #00acc1;     /* Cian vibrante para acentos */
-  --color-secondary-dark: #00838f;/* Cian oscuro para hover de botones */
-  --color-accent: #ff9800;        /* Naranja para llamados a acción */
-  --color-bg: #f0f4f8;            /* Fondo azul-gris muy sutil */
-  --color-card: #ffffff;          /* Fondo de las tarjetas */
-  --color-text: #263238;          /* Texto principal (gris azulado oscuro) */
-  --color-text-light: #ffffff;    /* Texto sobre fondos oscuros */
-  --color-muted: #78909c;         /* Texto secundario / materia */
-  --border-radius: 16px;          /* Bordes más redondeados (moderno) */
-  --card-padding: 1.25rem;        /* Padding interno de tarjetas */
-  --shadow: 0 2px 8px rgba(0, 0, 0, 0.08),
-            0 8px 24px rgba(0, 0, 0, 0.06); /* Sombra suave multicapa */
-  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.1),
-                  0 16px 40px rgba(0, 0, 0, 0.1); /* Sombra al hover */
+  --color-primary: #ffff00;       /* Amarillo chillón */
+  --color-secondary: #ff00ff;     /* Magenta vibrante */
+  --color-accent: #00ff00;        /* Verde neón */
+  --color-bg: #e0e0e0;            /* Gris claro para el fondo base */
+  --color-card: #ffffff;          /* Fondo de las tarjetas blanco puro */
+  --color-text: #000000;          /* Negro absoluto */
+  --border-radius: 0px;           /* Cero curvas, brutalismo puro */
+  --border-thick: 4px solid #000; /* Bordes gruesos y negros */
+  --shadow-hard: 8px 8px 0px #000;/* Sombra dura, sin difuminado */
+  --shadow-hard-hover: 12px 12px 0px #000;
+  --card-padding: 1.5rem;
 }
 
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   background: var(--color-bg);
   color: var(--color-text);
+  /* Patrón de cuadrícula brutalista en el fondo */
+  background-image: linear-gradient(#000 1px, transparent 1px),
+                    linear-gradient(90deg, #000 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: -1px -1px;
 }
 
-
 /* =============================================================
-   2. HEADER (página principal / landing)
-   Gradiente azul oscuro con texto blanco centrado.
+   HEADER
    ============================================================= */
 header {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-  color: var(--color-text-light);
-  padding: 2.5rem 2rem;
+  background: var(--color-primary);
+  color: var(--color-text);
+  padding: 3rem 2rem;
   text-align: center;
-  border-bottom: 3px solid var(--color-secondary);
+  border-bottom: var(--border-thick);
 }
 
 header h1 {
-  font-size: 2rem;
-  margin: 0 0 0.5rem;
-  letter-spacing: -0.5px;
-  font-weight: 700;
+  font-size: 3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+  letter-spacing: -1px;
+  text-shadow: 3px 3px 0 #fff, 6px 6px 0 #000;
 }
 
 header p {
-  font-size: 1rem;
-  opacity: 0.88;
+  font-size: 1.2rem;
+  font-weight: 700;
   max-width: 600px;
-  margin: 0.5rem auto;
-  line-height: 1.5;
+  margin: 0 auto;
+  background: #fff;
+  padding: 0.5rem 1rem;
+  display: inline-block;
+  border: var(--border-thick);
+  box-shadow: 4px 4px 0px #000;
 }
 
-
 /* =============================================================
-   3. GALERÍA DE TARJETAS (página principal)
-   Grid responsivo que se adapta al ancho de la pantalla.
-   auto-fill + minmax crea columnas automáticamente.
+   GALERÍA
    ============================================================= */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1.5rem;
-  padding: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 3rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Cada tarjeta de docente */
 .card {
   background: var(--color-card);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-hard);
+  transition: all 0.2s ease-in-out;
   display: flex;
   flex-direction: column;
 }
 
-/* Efecto hover: la tarjeta "flota" hacia arriba */
 .card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-hover);
+  transform: translate(-4px, -4px);
+  box-shadow: var(--shadow-hard-hover);
 }
 
-/* Foto del docente dentro de la tarjeta */
 .card img {
   width: 100%;
-  height: 220px;
-  object-fit: cover; /* Recorta la imagen para llenar el espacio */
+  height: 250px;
+  object-fit: cover;
+  border-bottom: var(--border-thick);
+  filter: contrast(120%) grayscale(20%);
 }
 
-/* Nombre del docente */
 .card h3 {
   padding: 0 var(--card-padding);
-  margin: 1.25rem 0 0.25rem;
-  color: var(--color-primary);
-  font-size: 1.25rem;
+  margin: 1.5rem 0 0.5rem;
+  font-size: 1.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
-/* Materia que dicta */
 .card p {
   padding: 0 var(--card-padding);
-  color: var(--color-muted);
-  font-size: 0.95rem;
-  flex-grow: 1; /* Empuja el botón hacia abajo */
-  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  flex-grow: 1;
+  margin-bottom: 1.5rem;
 }
 
-/* Botón "Ver en AR" dentro de la tarjeta */
 .card a {
   display: block;
   margin: 0 var(--card-padding) var(--card-padding);
-  padding: 0.85rem;
+  padding: 1rem;
   background: var(--color-secondary);
-  color: var(--color-text-light);
+  color: #fff;
   text-align: center;
   text-decoration: none;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: background 0.3s ease, transform 0.2s ease;
+  font-size: 1.2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  border: var(--border-thick);
+  box-shadow: 4px 4px 0px #000;
+  transition: all 0.1s ease;
 }
 
-.card a:hover {
-  background: var(--color-secondary-dark); /* Cian más oscuro al pasar el mouse */
-  transform: scale(1.02);
+.card a:active, .card a:hover {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0px #000;
+  background: var(--color-accent);
+  color: #000;
 }
-
 
 /* =============================================================
-   4. FOOTER
-   Pie de página simple con créditos.
+   FOOTER
    ============================================================= */
 footer {
   text-align: center;
-  padding: 1.5rem;
-  color: #999;
-  font-size: 0.85rem;
-  border-top: 1px solid #eee;
+  padding: 2rem;
+  background: #000;
+  color: #fff;
+  font-weight: 700;
+  border-top: var(--border-thick);
 }
 
-
 /* =============================================================
-   5. OVERLAY DE CARGA (página AR)
-   Pantalla completa con fondo azul oscuro, spinner giratorio,
-   y texto indicando que se está cargando la experiencia AR.
-   Se oculta agregando la clase 'hidden'.
+   OVERLAY DE CARGA (Página AR)
    ============================================================= */
 #loading-overlay {
   position: fixed;
-  inset: 0; /* Equivale a top:0, right:0, bottom:0, left:0 */
-  background: rgba(26, 35, 126, 0.95);
+  inset: 0;
+  background: var(--color-primary);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  color: var(--color-text-light);
+  border: 10px solid #000;
 }
 
 #loading-overlay.hidden {
   display: none;
 }
 
-/* Spinner: círculo con borde parcialmente coloreado que gira */
+#loading-overlay p {
+  font-weight: 900;
+  font-size: 2rem;
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow: 2px 2px 0 #fff;
+}
+
 .spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid rgba(255, 255, 255, 0.3);
-  border-top-color: var(--color-secondary);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-bottom: 1rem;
+  width: 80px;
+  height: 80px;
+  background: var(--color-secondary);
+  border: var(--border-thick);
+  animation: brutalSpin 1s steps(4) infinite;
+  margin-bottom: 2rem;
 }
 
-/* Animación de rotación para el spinner */
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+@keyframes brutalSpin {
+  100% { transform: rotate(360deg); }
 }
-
 
 /* =============================================================
-   6. CONTENEDOR AR
-   Ocupa toda la pantalla. MindAR coloca el <video> y <canvas>
-   aquí adentro automáticamente.
+   CONTENEDOR AR
    ============================================================= */
 #ar-container {
   position: fixed;
@@ -209,170 +202,143 @@ footer {
   z-index: 1;
 }
 
-
 /* =============================================================
-   7. FICHA FLOTANTE (overlay informativo del docente)
-   Panel que se desliza desde abajo con los datos del docente.
-   Usa backdrop-filter para un efecto de cristal esmerilado.
-   La transición de translateY lo anima suavemente.
+   FICHA FLOTANTE (AR)
    ============================================================= */
 .ficha {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); /* Soporte Safari */
-  border-radius: 20px 20px 0 0;
-  padding: 1.5rem;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+  bottom: 2rem;
+  left: 2rem;
+  right: 2rem;
+  background: #fff;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-hard);
+  padding: 2rem;
   z-index: 100;
-  /* Estado inicial: fuera de la pantalla (abajo) */
-  transform: translateY(100%);
-  transition: transform 0.4s ease-out;
-  max-height: 60vh;
+  transform: translateY(150%);
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  max-height: 70vh;
   overflow-y: auto;
 }
 
-/* Cuando tiene la clase 'visible', sube a su posición normal */
 .ficha.visible {
   transform: translateY(0);
 }
 
-/* Encabezado de la ficha: nombre y materia con línea divisoria */
 .ficha-header {
-  border-bottom: 2px solid var(--color-secondary);
-  padding-bottom: 0.75rem;
-  margin-bottom: 0.75rem;
+  border-bottom: var(--border-thick);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .ficha-header h2 {
   margin: 0;
-  color: var(--color-primary);
-  font-size: 1.3rem;
+  font-size: 2rem;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
 .ficha-header p {
-  margin: 0.25rem 0 0;
-  color: var(--color-secondary);
-  font-weight: 600;
+  margin: 0.5rem 0 0;
+  background: var(--color-primary);
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border: 2px solid #000;
+  font-weight: 700;
 }
 
-/* Cuerpo de la ficha: datos de contacto y descripción */
 .ficha-body p {
-  margin: 0.4rem 0;
-  font-size: 0.9rem;
-  line-height: 1.4;
+  margin: 0.75rem 0;
+  font-size: 1.1rem;
+  border-bottom: 2px dashed #000;
+  padding-bottom: 0.5rem;
 }
 
-/* Las etiquetas (Email:, Oficina:, etc.) en color primario */
-.ficha-body p strong {
-  color: var(--color-primary);
-}
-
-/* Botón "Cerrar" de la ficha */
 #ficha-close {
   display: block;
   width: 100%;
-  margin-top: 1rem;
-  padding: 0.75rem;
-  background: var(--color-primary);
-  color: var(--color-text-light);
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #000;
+  color: #fff;
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  font-weight: 900;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.1s;
 }
 
 #ficha-close:hover {
-  background: #283593;
+  background: var(--color-secondary);
+  color: #000;
 }
 
+#ficha-close:active {
+  transform: scale(0.98);
+}
 
 /* =============================================================
-   8. BOTONES FLOTANTES DE LA PÁGINA AR
-   - btn-info: botón naranja pulsante "Info Docente"
-   - btn-back: botón semitransparente "← Volver"
-   Ambos flotan sobre el contenido AR.
+   BOTONES AR FLOTANTES
    ============================================================= */
-
-/* Botón "Info Docente" — aparece cuando se detecta el target */
 .btn-info {
   position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
+  bottom: 2rem;
+  right: 2rem;
   z-index: 50;
-  padding: 0.75rem 1.25rem;
+  padding: 1rem 1.5rem;
   background: var(--color-accent);
-  color: var(--color-text-light);
-  border: none;
-  border-radius: 25px;
-  font-size: 1rem;
+  color: #000;
+  border: var(--border-thick);
+  box-shadow: 4px 4px 0px #000;
+  font-size: 1.2rem;
+  font-weight: 900;
+  text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  /* Animación pulsante para llamar la atención */
-  animation: pulse 2s infinite;
+  transition: all 0.1s;
 }
 
-/* Cuando tiene la clase 'hidden', se oculta */
 .btn-info.hidden {
   display: none;
 }
 
-/* Animación pulsante: un "halo" naranja que se expande y desvanece */
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.5);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(255, 152, 0, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(255, 152, 0, 0);
-  }
+.btn-info:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0px #000;
 }
 
-/* Botón "← Volver" — siempre visible en esquina superior izquierda */
 .btn-back {
   position: fixed;
-  top: 1rem;
-  left: 1rem;
+  top: 1.5rem;
+  left: 1.5rem;
   z-index: 50;
-  padding: 0.5rem 1rem;
-  background: rgba(0, 0, 0, 0.5);
-  color: var(--color-text-light);
+  padding: 0.75rem 1.25rem;
+  background: #fff;
+  color: #000;
   text-decoration: none;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  transition: background 0.3s ease;
+  font-weight: 900;
+  text-transform: uppercase;
+  border: var(--border-thick);
+  box-shadow: 4px 4px 0px #000;
+  transition: all 0.1s;
 }
 
-.btn-back:hover {
-  background: rgba(0, 0, 0, 0.7);
+.btn-back:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0px #000;
 }
-
 
 /* =============================================================
-   9. RESPONSIVE
-   Ajustes para pantallas pequeñas (móviles).
-   La galería ya es responsiva gracias a auto-fill, pero
-   reducimos padding y tamaño de fuente para aprovechar espacio.
+   RESPONSIVE
    ============================================================= */
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   header h1 {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
-
-  .gallery {
-    padding: 1rem;
-    gap: 1rem;
-  }
-
-  .ficha-header h2 {
-    font-size: 1.1rem;
+  .ficha {
+    bottom: 0; left: 0; right: 0;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
   }
 }

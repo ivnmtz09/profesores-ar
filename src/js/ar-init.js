@@ -49,10 +49,10 @@ async function inicializarAR() {
   console.log(`🚀 Iniciando experiencia AR para: ${docenteId}`);
 
   // ---- PASO 2: Definir las rutas de los recursos ----
-  // Cada docente tiene su propio archivo .mind (target compilado
-  // a partir de su foto) y su propio modelo 3D en formato .glb
-  const targetPath = `../public/targets/${docenteId}.mind`;
-  const modelPath  = `../public/models/${docenteId}.glb`;
+  // Ahora que movimos todo a src/, las rutas relativas desde ar.html
+  // son directas a las carpetas.
+  const targetPath = `targets/${docenteId}.mind`;
+  const modelPath  = `models/${docenteId}.glb`;
 
   try {
     // ---- PASO 3: Cargar la ficha EN PARALELO ----
