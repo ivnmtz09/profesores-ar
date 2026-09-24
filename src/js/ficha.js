@@ -113,9 +113,9 @@ function renderizarFicha(datos) {
   // Para los campos del cuerpo, usamos innerHTML para poder
   // incluir la etiqueta en negrita (<strong>)
   document.getElementById('ficha-email').innerHTML =
-    `<strong>Email:</strong> ${datos.email || 'No disponible'}`;
+    `<span class="label">Email</span><span class="value">${datos.email || 'No disponible'}</span>`;
   document.getElementById('ficha-descripcion').innerHTML =
-    `<strong>Sobre el docente:</strong> ${datos.descripcion || 'Sin descripción disponible.'}`;
+    `<span class="label">Sobre el docente</span><span class="value">${datos.descripcion || 'Sin descripción disponible.'}</span>`;
 
   console.log('🎴 Ficha del docente renderizada correctamente');
 }

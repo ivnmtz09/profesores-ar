@@ -269,12 +269,29 @@ footer {
 }
 
 .ficha-body p {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 1rem;
+  border-radius: 12px;
   margin: 0.75rem 0;
-  font-size: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.ficha-body p .label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.ficha-body p .value {
+  font-size: 1.05rem;
   color: var(--color-text);
-  line-height: 1.6;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  padding-bottom: 0.75rem;
+  line-height: 1.5;
 }
 
 #ficha-close {

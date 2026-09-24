@@ -127,23 +127,76 @@ async function inicializarAR() {
     // ---- PASO 8: Configurar el modelo 3D ----
     const modelo = gltf.scene;
 
+    // Si el docente es "adanud", convertir todo su modelo a dorado
+    if (docenteId === 'adanud') {
+      modelo.traverse((child) => {
+        if (child.isMesh) {
+          child.material = new THREE.MeshStandardMaterial({
+            color: 0xffd700, // Dorado
+            metalness: 0.8,
+            roughness: 0.2
+          });
+        }
+      });
+    }
+
     // ESCALA: ajustamos el tamaño del modelo.
     // MODIFICA ESTOS NÚMEROS HASTA ENCONTRAR EL TAMAÑO PERFECTO
-    // Ejemplo: Si 12 es muy grande, intenta 8, 8, 8
-    modelo.scale.set(12, 12, 12);
+    let currentScale = 3; // Tamaño por defecto (12 era muy grande)
+    modelo.scale.set(currentScale, currentScale, currentScale);
 
     // POSICIÓN: lo colocamos centrado sobre la tarjeta física.
-    // (x, y, z) → x = izquierda/derecha, y = arriba/abajo, z = profundidad
-    // MODIFICA ESTOS NÚMEROS SI EL MODELO QUEDA MUY ARRIBA O MUY ABAJO
     modelo.position.set(0, -0.5, 0);
-
-    // ROTACIÓN: ajusta si tu modelo aparece de espaldas o girado.
-    // Los valores son en radianes. Math.PI = 180°
     modelo.rotation.set(0, 0, 0);
 
     // Agregamos el modelo al grupo del anchor.
-    // Ahora el modelo está "anclado" a la imagen detectada.
     anchor.group.add(modelo);
+
+    // ---- PASO 8.5: GESTOS TÁCTILES (Escalar y Rotar) ----
+    const container = document.getElementById('ar-container');
+    let isDragging = false;
+    let previousTouchPosition = { x: 0, y: 0 };
+    let initialPinchDistance = null;
+    let initialScaleAtPinch = currentScale;
+
+    container.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        isDragging = true;
+        previousTouchPosition = { x: e.touches[0].pageX, y: e.touches[0].pageY };
+      } else if (e.touches.length === 2) {
+        isDragging = false;
+        const dx = e.touches[0].pageX - e.touches[1].pageX;
+        const dy = e.touches[0].pageY - e.touches[1].pageY;
+        initialPinchDistance = Math.sqrt(dx * dx + dy * dy);
+        initialScaleAtPinch = currentScale;
+      }
+    }, { passive: false });
+
+    container.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 1 && isDragging) {
+        // Rotar con 1 dedo
+        const deltaX = e.touches[0].pageX - previousTouchPosition.x;
+        modelo.rotation.y += deltaX * 0.02; // Sensibilidad de rotación
+        previousTouchPosition = { x: e.touches[0].pageX, y: e.touches[0].pageY };
+      } else if (e.touches.length === 2 && initialPinchDistance) {
+        // Escalar (Pinch to zoom) con 2 dedos
+        const dx = e.touches[0].pageX - e.touches[1].pageX;
+        const dy = e.touches[0].pageY - e.touches[1].pageY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        const scaleFactor = distance / initialPinchDistance;
+        currentScale = initialScaleAtPinch * scaleFactor;
+        
+        // Límites de tamaño: mínimo 0.5x, máximo 20x
+        currentScale = Math.max(0.5, Math.min(20, currentScale));
+        modelo.scale.set(currentScale, currentScale, currentScale);
+      }
+    }, { passive: false });
+
+    container.addEventListener('touchend', () => {
+      isDragging = false;
+      initialPinchDistance = null;
+    });
 
     // ---- PASO 9: Animaciones del modelo (opcional) ----
     // Si el modelo .glb incluye animaciones (gestos, movimiento),
@@ -235,7 +288,7 @@ async function inicializarAR() {
 
   } catch (error) {
     console.error('❌ Error fatal al inicializar AR (posible error 404 en modelo .glb):', error);
-    mostrarError('Error: Faltan archivos del docente');
+    mostrarError('El modelo 3D de este docente está en construcción. ¡Se agregará muy pronto!');
   }
 }
 
