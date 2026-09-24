@@ -20,15 +20,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { inicializarFicha, obtenerIdDocente } from './ficha.js';
-
-// -----------------------------------------------------------
-// MindAR se carga como script global (no es un módulo ES),
-// por eso lo accedemos a través de window.MINDAR.
-// MindARThree es la clase que integra MindAR con Three.js,
-// creando automáticamente escena, cámara y renderer.
-// -----------------------------------------------------------
-const { MindARThree } = window.MINDAR.IMAGE;
-
+import { MindARThree } from 'mindar-image-three';
 
 // =============================================================
 // inicializarAR()
@@ -68,8 +60,8 @@ async function inicializarAR() {
     //   - Una escena, cámara y renderer de Three.js
     //   - El motor de tracking de imágenes
     const mindarThree = new MindARThree({
-      container: document.getElementById('ar-container'), // Dónde renderizar
-      imageTargetSrc: targetPath, // Archivo .mind del docente
+      container: document.querySelector("#ar-container"),
+      imageTargetSrc: 'targets/' + docenteId + '.mind'
     });
 
     // Desestructuramos para obtener las referencias a los objetos de Three.js
@@ -189,16 +181,36 @@ async function inicializarAR() {
       document.getElementById('ficha-overlay').classList.remove('visible');
     };
 
-    // ---- PASO 11: Iniciar MindAR ----
-    // Esto activa la cámara del dispositivo y comienza el
-    // proceso de reconocimiento de imagen en tiempo real.
-    // El usuario verá el diálogo de permiso de cámara aquí.
-    await mindarThree.start();
-    console.log('📸 MindAR iniciado — apunta la cámara a la tarjeta');
+    // ---- PASO 11: Mostrar Botón para Iniciar Cámara ----
+    // Ahora esperamos la interacción del usuario para evitar bloqueos
+    // de seguridad (getUserMedia) en navegadores móviles.
+    const btnStart = document.getElementById('btn-start');
+    const loadingText = document.querySelector('#loading-overlay p');
+    const spinner = document.querySelector('.spinner');
 
-    // ---- PASO 12: Ocultar el overlay de carga ----
-    // Todo está listo, ocultamos la pantalla de "Cargando..."
-    document.getElementById('loading-overlay').classList.add('hidden');
+    if (loadingText) loadingText.innerText = '¡Todo listo!';
+    if (spinner) spinner.style.display = 'none';
+
+    if (btnStart) {
+      btnStart.style.display = 'inline-block';
+      
+      btnStart.addEventListener('click', async () => {
+        try {
+          btnStart.innerText = 'Conectando...';
+          btnStart.disabled = true;
+          btnStart.style.opacity = '0.5';
+
+          await mindarThree.start();
+          console.log('📸 MindAR iniciado — apunta la cámara a la tarjeta');
+          
+          // Ocultar overlay
+          document.getElementById('loading-overlay').classList.add('hidden');
+        } catch (startError) {
+          console.error('❌ Error al iniciar cámara o cargar archivo .mind:', startError);
+          mostrarError('Error: Faltan archivos del docente o permisos de cámara denegados.');
+        }
+      });
+    }
 
     // ---- PASO 13: Esperamos a que la ficha termine de cargar ----
     // Si Firestore tardó más que MindAR, aquí esperamos el resultado
@@ -222,8 +234,8 @@ async function inicializarAR() {
     });
 
   } catch (error) {
-    console.error('❌ Error fatal al inicializar AR:', error);
-    mostrarError(`Error al inicializar la experiencia AR: ${error.message}`);
+    console.error('❌ Error fatal al inicializar AR (posible error 404 en modelo .glb):', error);
+    mostrarError('Error: Faltan archivos del docente');
   }
 }
 
@@ -259,7 +271,12 @@ function mostrarError(mensaje) {
 // Esperamos a que todo el HTML esté cargado (DOMContentLoaded)
 // antes de inicializar la experiencia AR.
 // =============================================================
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('📄 Página AR cargada — inicializando...');
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('📄 Página AR cargada — inicializando...');
+    inicializarAR();
+  });
+} else {
+  console.log('📄 Página AR ya estaba cargada — inicializando...');
   inicializarAR();
-});
+}

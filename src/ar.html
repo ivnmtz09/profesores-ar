@@ -23,7 +23,8 @@
   <div id="loading-overlay">
     <div class="spinner"></div>
     <p>Cargando experiencia AR...</p>
-    <p><small>Por favor, permite el acceso a la cámara</small></p>
+    <p><small>Preparando modelos y configuraciones...</small></p>
+    <button id="btn-start" style="display: none; margin-top: 1.5rem; padding: 0.85rem 2rem; font-size: 1.1rem; font-weight: 600; background: #3b82f6; color: white; border: none; border-radius: 999px; cursor: pointer; box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4); transition: transform 0.2s;">Iniciar Cámara</button>
   </div>
 
   <!-- ============================================================= -->
@@ -79,22 +80,18 @@
   <!-- 3. Nuestros módulos: firebase → ficha → ar-init               -->
   <!-- ============================================================= -->
 
-  <!-- Mapa de importaciones para Three.js v0.170.0 -->
-  <!-- Esto permite usar 'import * as THREE from "three"' en los     -->
-  <!-- archivos .js sin necesidad de bundlers como Webpack            -->
+  <!-- Mapa de importaciones -->
+  <!-- Esto permite usar 'import * as THREE from "three"' y cargar mindar directamente -->
   <script type="importmap">
   {
     "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
-      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      "three": "https://unpkg.com/three@0.128.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.128.0/examples/jsm/",
+      "three/examples/jsm/": "https://unpkg.com/three@0.128.0/examples/jsm/",
+      "mindar-image-three": "https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-three.prod.js"
     }
   }
   </script>
-
-  <!-- MindAR: librería de tracking de imágenes integrada con Three.js -->
-  <!-- Se carga como script global (no soporta ES modules)             -->
-  <!-- Expone window.MINDAR.IMAGE.MindARThree                          -->
-  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"></script>
 
   <!-- Nuestros módulos de la aplicación -->
   <script type="module" src="js/firebase-config.js"></script>

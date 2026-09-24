@@ -1,22 +1,24 @@
 /* =============================================================
    style.css
    Estilos del proyecto "Profesores de Sistemas - Uniguajira AR"
-   DISEÑO NEO-BRUTALISTA
+   DISEÑO MINIMALISTA & GLASSMORPHISM
    ============================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --color-primary: #ffff00;       /* Amarillo chillón */
-  --color-secondary: #ff00ff;     /* Magenta vibrante */
-  --color-accent: #00ff00;        /* Verde neón */
-  --color-bg: #e0e0e0;            /* Gris claro para el fondo base */
-  --color-card: #ffffff;          /* Fondo de las tarjetas blanco puro */
-  --color-text: #000000;          /* Negro absoluto */
-  --border-radius: 0px;           /* Cero curvas, brutalismo puro */
-  --border-thick: 4px solid #000; /* Bordes gruesos y negros */
-  --shadow-hard: 8px 8px 0px #000;/* Sombra dura, sin difuminado */
-  --shadow-hard-hover: 12px 12px 0px #000;
+  --color-primary: #3b82f6;       /* Azul primario */
+  --color-secondary: #60a5fa;     /* Azul claro */
+  --color-accent: #2563eb;        /* Azul oscuro / hover */
+  --color-bg-start: #e0eafc;      /* Degradado inicio */
+  --color-bg-end: #cfdef3;        /* Degradado fin */
+  --color-card: rgba(255, 255, 255, 0.55);
+  --color-text: #1e293b;          /* Texto oscuro / slate */
+  --color-text-light: #64748b;    /* Texto secundario */
+  --border-radius: 20px;
+  --border-thick: 1px solid rgba(255, 255, 255, 0.6);
+  --shadow-hard: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  --shadow-hard-hover: 0 12px 48px 0 rgba(31, 38, 135, 0.12);
   --card-padding: 1.5rem;
 }
 
@@ -26,46 +28,42 @@
 
 body {
   margin: 0;
-  font-family: 'Space Grotesk', system-ui, sans-serif;
-  background: var(--color-bg);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, var(--color-bg-start) 0%, var(--color-bg-end) 100%);
+  background-attachment: fixed;
   color: var(--color-text);
-  /* Patrón de cuadrícula brutalista en el fondo */
-  background-image: linear-gradient(#000 1px, transparent 1px),
-                    linear-gradient(90deg, #000 1px, transparent 1px);
-  background-size: 40px 40px;
-  background-position: -1px -1px;
+  min-height: 100vh;
 }
 
 /* =============================================================
    HEADER
    ============================================================= */
 header {
-  background: var(--color-primary);
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   color: var(--color-text);
   padding: 3rem 2rem;
   text-align: center;
   border-bottom: var(--border-thick);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 }
 
 header h1 {
-  font-size: 3rem;
-  font-weight: 900;
-  text-transform: uppercase;
+  font-size: 2.5rem;
+  font-weight: 700;
   margin: 0 0 1rem;
-  letter-spacing: -1px;
-  text-shadow: 3px 3px 0 #fff, 6px 6px 0 #000;
+  letter-spacing: -0.5px;
+  color: var(--color-accent);
 }
 
 header p {
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: 500;
   max-width: 600px;
   margin: 0 auto;
-  background: #fff;
-  padding: 0.5rem 1rem;
-  display: inline-block;
-  border: var(--border-thick);
-  box-shadow: 4px 4px 0px #000;
+  color: var(--color-text-light);
+  line-height: 1.6;
 }
 
 /* =============================================================
@@ -82,63 +80,71 @@ header p {
 
 .card {
   background: var(--color-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: var(--border-thick);
+  border-radius: var(--border-radius);
   box-shadow: var(--shadow-hard);
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .card:hover {
-  transform: translate(-4px, -4px);
+  transform: translateY(-5px);
   box-shadow: var(--shadow-hard-hover);
+  background: rgba(255, 255, 255, 0.7);
 }
 
 .card img {
   width: 100%;
   height: 250px;
   object-fit: cover;
-  border-bottom: var(--border-thick);
-  filter: contrast(120%) grayscale(20%);
+  transition: transform 0.3s ease;
+}
+
+.card:hover img {
+  transform: scale(1.02);
 }
 
 .card h3 {
   padding: 0 var(--card-padding);
   margin: 1.5rem 0 0.5rem;
-  font-size: 1.8rem;
-  font-weight: 900;
-  text-transform: uppercase;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-accent);
 }
 
 .card p {
   padding: 0 var(--card-padding);
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 400;
+  color: var(--color-text-light);
   flex-grow: 1;
   margin-bottom: 1.5rem;
+  line-height: 1.5;
 }
 
 .card a {
   display: block;
   margin: 0 var(--card-padding) var(--card-padding);
-  padding: 1rem;
-  background: var(--color-secondary);
+  padding: 0.85rem;
+  background: var(--color-primary);
   color: #fff;
   text-align: center;
   text-decoration: none;
-  font-size: 1.2rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  border: var(--border-thick);
-  box-shadow: 4px 4px 0px #000;
-  transition: all 0.1s ease;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.39);
 }
 
-.card a:active, .card a:hover {
-  transform: translate(4px, 4px);
-  box-shadow: 0px 0px 0px #000;
+.card a:hover {
   background: var(--color-accent);
-  color: #000;
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.23);
+  transform: translateY(-2px);
 }
 
 /* =============================================================
@@ -147,9 +153,11 @@ header p {
 footer {
   text-align: center;
   padding: 2rem;
-  background: #000;
-  color: #fff;
-  font-weight: 700;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--color-text-light);
+  font-weight: 500;
   border-top: var(--border-thick);
 }
 
@@ -159,38 +167,46 @@ footer {
 #loading-overlay {
   position: fixed;
   inset: 0;
-  background: var(--color-primary);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  border: 10px solid #000;
 }
 
 #loading-overlay.hidden {
   display: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
 #loading-overlay p {
-  font-weight: 900;
-  font-size: 2rem;
-  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 1.25rem;
+  color: var(--color-accent);
   text-align: center;
-  text-shadow: 2px 2px 0 #fff;
+  margin-top: 1.5rem;
+}
+
+#loading-overlay small {
+  color: var(--color-text-light);
+  font-size: 0.95rem;
 }
 
 .spinner {
-  width: 80px;
-  height: 80px;
-  background: var(--color-secondary);
-  border: var(--border-thick);
-  animation: brutalSpin 1s steps(4) infinite;
-  margin-bottom: 2rem;
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(59, 130, 246, 0.2);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: modernSpin 1s linear infinite;
 }
 
-@keyframes brutalSpin {
-  100% { transform: rotate(360deg); }
+@keyframes modernSpin {
+  to { transform: rotate(360deg); }
 }
 
 /* =============================================================
@@ -210,13 +226,16 @@ footer {
   bottom: 2rem;
   left: 2rem;
   right: 2rem;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: var(--border-thick);
-  box-shadow: var(--shadow-hard);
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
   padding: 2rem;
   z-index: 100;
   transform: translateY(150%);
-  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   max-height: 70vh;
   overflow-y: auto;
 }
@@ -226,56 +245,57 @@ footer {
 }
 
 .ficha-header {
-  border-bottom: var(--border-thick);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   padding-bottom: 1rem;
   margin-bottom: 1rem;
 }
 
 .ficha-header h2 {
   margin: 0;
-  font-size: 2rem;
-  font-weight: 900;
-  text-transform: uppercase;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-accent);
 }
 
 .ficha-header p {
   margin: 0.5rem 0 0;
-  background: var(--color-primary);
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--color-primary);
   display: inline-block;
-  padding: 0.25rem 0.5rem;
-  border: 2px solid #000;
-  font-weight: 700;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 
 .ficha-body p {
   margin: 0.75rem 0;
-  font-size: 1.1rem;
-  border-bottom: 2px dashed #000;
-  padding-bottom: 0.5rem;
+  font-size: 1rem;
+  color: var(--color-text);
+  line-height: 1.6;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding-bottom: 0.75rem;
 }
 
 #ficha-close {
   display: block;
   width: 100%;
-  margin-top: 2rem;
-  padding: 1rem;
-  background: #000;
+  margin-top: 1.5rem;
+  padding: 0.85rem;
+  background: var(--color-primary);
   color: #fff;
   border: none;
-  font-size: 1.2rem;
-  font-weight: 900;
-  text-transform: uppercase;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.1s;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.39);
 }
 
 #ficha-close:hover {
-  background: var(--color-secondary);
-  color: #000;
-}
-
-#ficha-close:active {
-  transform: scale(0.98);
+  background: var(--color-accent);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.23);
 }
 
 /* =============================================================
@@ -286,25 +306,28 @@ footer {
   bottom: 2rem;
   right: 2rem;
   z-index: 50;
-  padding: 1rem 1.5rem;
-  background: var(--color-accent);
-  color: #000;
+  padding: 0.85rem 1.5rem;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--color-accent);
   border: var(--border-thick);
-  box-shadow: 4px 4px 0px #000;
-  font-size: 1.2rem;
-  font-weight: 900;
-  text-transform: uppercase;
+  border-radius: 999px; /* Pill shape */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.1s;
+  transition: all 0.2s ease;
 }
 
 .btn-info.hidden {
   display: none;
 }
 
-.btn-info:active {
-  transform: translate(4px, 4px);
-  box-shadow: 0px 0px 0px #000;
+.btn-info:hover {
+  background: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.15);
 }
 
 .btn-back {
@@ -313,19 +336,22 @@ footer {
   left: 1.5rem;
   z-index: 50;
   padding: 0.75rem 1.25rem;
-  background: #fff;
-  color: #000;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--color-accent);
   text-decoration: none;
-  font-weight: 900;
-  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 999px; /* Pill shape */
   border: var(--border-thick);
-  box-shadow: 4px 4px 0px #000;
-  transition: all 0.1s;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  transition: all 0.2s ease;
 }
 
-.btn-back:active {
-  transform: translate(4px, 4px);
-  box-shadow: 0px 0px 0px #000;
+.btn-back:hover {
+  background: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.15);
 }
 
 /* =============================================================
@@ -333,10 +359,11 @@ footer {
    ============================================================= */
 @media (max-width: 600px) {
   header h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
   .ficha {
     bottom: 0; left: 0; right: 0;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
     border-bottom: none;
     border-left: none;
     border-right: none;
