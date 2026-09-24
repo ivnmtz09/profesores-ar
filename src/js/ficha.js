@@ -64,7 +64,6 @@ function obtenerIdDocente() {
 //   nombre:      "Prof. Jair Martínez",
 //   materia:     "Redes y Telecomunicaciones",
 //   email:       "jmartinez@uniguajira.edu.co",
-//   oficina:     "Bloque B, Oficina 201",
 //   descripcion: "Docente con 10 años de experiencia..."
 // }
 // =============================================================
@@ -104,7 +103,7 @@ async function cargarDatosDocente(id) {
 // ya están definidos en ar.html.
 //
 // Recibe un objeto con las propiedades:
-//   nombre, materia, email, oficina, descripcion
+//   nombre, materia, email, descripcion
 // =============================================================
 function renderizarFicha(datos) {
   // Rellenamos el encabezado de la ficha
@@ -112,15 +111,11 @@ function renderizarFicha(datos) {
   document.getElementById('ficha-materia').textContent = datos.materia || 'Sin materia asignada';
 
   // Para los campos del cuerpo, usamos innerHTML para poder
-  // incluir el ícono emoji y la etiqueta en negrita (<strong>)
+  // incluir la etiqueta en negrita (<strong>)
   document.getElementById('ficha-email').innerHTML =
-    `<strong>📧 Email:</strong> ${datos.email || 'No disponible'}`;
-  document.getElementById('ficha-oficina').innerHTML =
-    `<strong>📍 Oficina:</strong> ${datos.oficina || 'No disponible'}`;
-  document.getElementById('ficha-semestre').innerHTML =
-    `<strong>📅 Semestre:</strong> ${datos.semestre || ''}`;
+    `<strong>Email:</strong> ${datos.email || 'No disponible'}`;
   document.getElementById('ficha-descripcion').innerHTML =
-    `<strong>📝 Sobre el docente:</strong> ${datos.descripcion || 'Sin descripción disponible.'}`;
+    `<strong>Sobre el docente:</strong> ${datos.descripcion || 'Sin descripción disponible.'}`;
 
   console.log('🎴 Ficha del docente renderizada correctamente');
 }
@@ -134,15 +129,13 @@ function renderizarFicha(datos) {
 // =============================================================
 function mostrarErrorEnFicha(mensaje) {
   // Ponemos el mensaje de error en el encabezado de la ficha
-  document.getElementById('ficha-nombre').textContent = '😕 Error';
+  document.getElementById('ficha-nombre').textContent = 'Error';
   document.getElementById('ficha-materia').textContent = mensaje;
 
   // Limpiamos los campos del cuerpo para que no muestren basura
   document.getElementById('ficha-email').textContent = '';
-  document.getElementById('ficha-oficina').textContent = '';
-  document.getElementById('ficha-semestre').textContent = '';
   document.getElementById('ficha-descripcion').innerHTML =
-    '<strong>💡 Sugerencia:</strong> Verifica que la URL tenga el parámetro correcto ' +
+    '<strong>Sugerencia:</strong> Verifica que la URL tenga el parámetro correcto ' +
     '(ej: <code>ar.html?id=jair</code>) y que el docente exista en la base de datos.';
 
   // Mostramos la ficha automáticamente para que el usuario vea el error

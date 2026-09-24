@@ -47,7 +47,7 @@
   <!-- Al hacer clic, muestra la ficha flotante con los datos.       -->
   <!-- Se oculta con la clase 'hidden' (controlado desde ar-init.js) -->
   <!-- ============================================================= -->
-  <button id="btn-info" class="btn-info hidden">ℹ️ Info Docente</button>
+  <button id="btn-info" class="btn-info hidden">Info Docente</button>
 
   <!-- ============================================================= -->
   <!-- FICHA FLOTANTE DEL DOCENTE                                    -->
@@ -64,8 +64,6 @@
     <!-- Cuerpo: datos de contacto y descripción -->
     <div class="ficha-body">
       <p id="ficha-email"></p>
-      <p id="ficha-oficina"></p>
-      <p id="ficha-semestre"></p>
       <p id="ficha-descripcion"></p>
     </div>
     <!-- Botón para cerrar la ficha -->
@@ -85,7 +83,7 @@
   <script type="importmap">
   {
     "imports": {
-      "three": "https://unpkg.com/three@0.128.0/build/three.module.js",
+      "three": "https://unpkg.com/three@0.128.0/build/three.module.js?v=1.2",
       "three/addons/": "https://unpkg.com/three@0.128.0/examples/jsm/",
       "three/examples/jsm/": "https://unpkg.com/three@0.128.0/examples/jsm/",
       "mindar-image-three": "https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-three.prod.js"
@@ -94,9 +92,9 @@
   </script>
 
   <!-- Nuestros módulos de la aplicación -->
-  <script type="module" src="js/firebase-config.js"></script>
-  <script type="module" src="js/ficha.js"></script>
-  <script type="module" src="js/ar-init.js"></script>
+  <script type="module" src="js/firebase-config.js?v=1.2"></script>
+  <script type="module" src="js/ficha.js?v=1.2"></script>
+  <script type="module" src="js/ar-init.js?v=1.2"></script>
 
 </body>
 </html>

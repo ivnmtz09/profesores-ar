@@ -128,14 +128,14 @@ async function inicializarAR() {
     const modelo = gltf.scene;
 
     // ESCALA: ajustamos el tamaño del modelo.
-    // 0.15 = 15% del tamaño original. Ajusta según tus modelos.
-    // Si tu modelo se ve muy grande o muy pequeño, cambia estos valores.
-    modelo.scale.set(0.15, 0.15, 0.15);
+    // MODIFICA ESTOS NÚMEROS HASTA ENCONTRAR EL TAMAÑO PERFECTO
+    // Ejemplo: Si 12 es muy grande, intenta 8, 8, 8
+    modelo.scale.set(12, 12, 12);
 
-    // POSICIÓN: lo colocamos ligeramente arriba del target
-    // para que "flote" sobre la tarjeta física.
-    // (x, y, z) → z positivo = hacia la cámara
-    modelo.position.set(0, 0, 0.1);
+    // POSICIÓN: lo colocamos centrado sobre la tarjeta física.
+    // (x, y, z) → x = izquierda/derecha, y = arriba/abajo, z = profundidad
+    // MODIFICA ESTOS NÚMEROS SI EL MODELO QUEDA MUY ARRIBA O MUY ABAJO
+    modelo.position.set(0, -0.5, 0);
 
     // ROTACIÓN: ajusta si tu modelo aparece de espaldas o girado.
     // Los valores son en radianes. Math.PI = 180°
