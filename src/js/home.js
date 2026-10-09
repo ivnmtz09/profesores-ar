@@ -1,8 +1,8 @@
 // =============================================================
 // home.js
-// Controlador principal de la Home: navegación por carreras,
-// directorio de docentes de Sistemas, modal de detalle con
-// datos de Firestore (nombre + correo) y visor 3D.
+// Controlador principal: navegación por carreras,
+// directorio de docentes de Sistemas, modal con
+// datos de Firestore (nombre + correo) y visor 3D interactivo.
 // =============================================================
 
 import { db } from './firebase-config.js';
@@ -12,79 +12,59 @@ import {
 } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
 // =============================================================
-// ESTADO DE LA APLICACIÓN
-// =============================================================
-let modalViewerLoaded = false; // Evita recargar el mismo modelo en el modal
-
-// =============================================================
 // REFERENCIAS AL DOM
 // =============================================================
 const sectionCarreras = document.getElementById('section-carreras');
 const sectionSistemas = document.getElementById('section-sistemas');
 const navBreadcrumb   = document.getElementById('nav-breadcrumb');
 const modalOverlay    = document.getElementById('modal-docente');
-const modal           = modalOverlay?.querySelector('.modal');
+const modalDialog     = modalOverlay?.querySelector('.modal-dialog');
 
 // =============================================================
-// NAVEGACIÓN POR HASH
-// Lee el hash de la URL (#sistemas) al cargar para restaurar la
-// vista si el usuario vuelve atrás desde ar.html.
+// NAVEGACIÓN POR VISTAS Y HASH
 // =============================================================
 function initNavegacion() {
   if (window.location.hash === '#sistemas') {
-    mostrarSistemas(false); // sin animación al cargar directo por hash
+    mostrarSistemas(false);
   } else {
     mostrarCarreras(false);
   }
 }
 
-// =============================================================
-// mostrarCarreras()
-// Muestra la vista general de Programas Académicos (grid de carreras)
-// y oculta el directorio de Sistemas.
-// =============================================================
 function mostrarCarreras(pushHistory = true) {
-  sectionCarreras.style.display = 'block';
-  sectionSistemas.classList.remove('visible');
-  navBreadcrumb.style.display = 'none';
+  if (sectionCarreras) sectionCarreras.style.display = 'block';
+  if (sectionSistemas) sectionSistemas.classList.remove('visible');
+  if (navBreadcrumb) navBreadcrumb.style.display = 'none';
 
   if (pushHistory) {
     history.pushState({ view: 'carreras' }, '', '#carreras');
   }
 }
 
-// =============================================================
-// mostrarSistemas()
-// Muestra el directorio de los 6 docentes de Ingeniería de Sistemas
-// y oculta la grilla de carreras.
-// =============================================================
 function mostrarSistemas(pushHistory = true) {
-  sectionCarreras.style.display = 'none';
-  sectionSistemas.classList.add('visible');
-  navBreadcrumb.style.display = 'flex';
+  if (sectionCarreras) sectionCarreras.style.display = 'none';
+  if (sectionSistemas) sectionSistemas.classList.add('visible');
+  if (navBreadcrumb) navBreadcrumb.style.display = 'block';
 
   if (pushHistory) {
     history.pushState({ view: 'sistemas' }, '', '#sistemas');
   }
 }
 
-// =============================================================
-// BOTÓN "Ver docentes de Sistemas"
-// =============================================================
+// Botones de navegación
 document.getElementById('btn-ir-sistemas')?.addEventListener('click', () => {
   mostrarSistemas();
 });
 
-// =============================================================
-// BOTÓN DE BREADCRUMB "Programas"
-// =============================================================
 document.getElementById('crumb-inicio')?.addEventListener('click', () => {
   mostrarCarreras();
 });
 
-// =============================================================
-// SOPORTE DEL HISTORIAL DEL NAVEGADOR (botón atrás del dispositivo)
-// =============================================================
+document.getElementById('btn-volver-carreras')?.addEventListener('click', () => {
+  mostrarCarreras();
+});
+
+// Soporte para botón atrás/adelante del navegador
 window.addEventListener('popstate', (e) => {
   if (e.state?.view === 'sistemas' || window.location.hash === '#sistemas') {
     mostrarSistemas(false);
@@ -94,8 +74,7 @@ window.addEventListener('popstate', (e) => {
 });
 
 // =============================================================
-// APERTURA DEL MODAL
-// Captura clics en cualquier botón .btn-ver de la galería.
+// APERTURA DEL MODAL DE DETALLE
 // =============================================================
 document.querySelectorAll('.btn-ver').forEach((btn) => {
   btn.addEventListener('click', () => {
@@ -105,43 +84,36 @@ document.querySelectorAll('.btn-ver').forEach((btn) => {
   });
 });
 
-// =============================================================
-// abrirModal(id)
-// Muestra el modal de detalle del docente:
-//   1. Muestra un estado de carga (skeleton).
-//   2. Consulta Firestore para obtener nombre y email.
-//   3. Carga el modelo 3D en <model-viewer>.
-//   4. Configura el botón de AR.
-// =============================================================
 async function abrirModal(id) {
   if (!modalOverlay) return;
 
-  // --- Resetear y mostrar estado de carga ---
+  // Estado inicial de carga
   setModalLoading(true);
-  document.getElementById('modal-nombre').textContent = 'Cargando...';
-  document.getElementById('modal-contact').style.display = 'none';
+  const nombreEl = document.getElementById('modal-nombre');
+  if (nombreEl) nombreEl.textContent = 'Cargando datos...';
 
-  // Configurar el visor 3D para el nuevo docente
+  const contactEl = document.getElementById('modal-contact');
+  if (contactEl) contactEl.style.display = 'none';
+
+  // Carga del modelo 3D en <model-viewer>
   const viewer = document.getElementById('viewer-3d');
   if (viewer) {
     viewer.src = `models/${id}.glb`;
     viewer.setAttribute('camera-orbit', '0deg 75deg 105%');
   }
 
-  // Configurar enlace a AR
+  // Enlace hacia experiencia AR
   const btnAR = document.getElementById('btn-ir-ar');
   if (btnAR) {
     btnAR.href = `ar.html?id=${id}`;
   }
 
-  // Bloquear scroll del body cuando el modal está abierto
+  // Prevenir scroll del fondo y mostrar modal
   document.body.style.overflow = 'hidden';
-
-  // Mostrar el overlay (animación CSS)
   modalOverlay.classList.add('visible');
-  modal?.focus();
+  modalDialog?.focus();
 
-  // --- Consultar Firestore ---
+  // Consulta en Firestore
   try {
     const docRef  = doc(db, 'docentes', id);
     const docSnap = await getDoc(docRef);
@@ -150,43 +122,37 @@ async function abrirModal(id) {
       const datos = docSnap.data();
       renderizarDatosModal(datos);
     } else {
-      document.getElementById('modal-nombre').textContent = id;
-      console.warn(`⚠️ Docente "${id}" no encontrado en Firestore.`);
+      if (nombreEl) nombreEl.textContent = id;
+      console.warn(`[Docentes AR] Docente "${id}" no encontrado en Firestore.`);
     }
   } catch (err) {
-    document.getElementById('modal-nombre').textContent = id;
-    console.error('❌ Error al leer Firestore:', err);
+    if (nombreEl) nombreEl.textContent = id;
+    console.error('[Docentes AR] Error al consultar Firestore:', err);
   } finally {
     setModalLoading(false);
   }
 }
 
-// =============================================================
-// renderizarDatosModal(datos)
-// Escribe en el modal únicamente el NOMBRE y el EMAIL del docente,
-// tal como solicita la especificación del proyecto.
-// =============================================================
 function renderizarDatosModal(datos) {
-  // Nombre
-  const nombre = datos.nombre || 'Docente';
-  document.getElementById('modal-nombre').textContent = nombre;
+  const nombreEl = document.getElementById('modal-nombre');
+  if (nombreEl) {
+    nombreEl.textContent = datos.nombre || 'Docente de Sistemas';
+  }
 
-  // Correo electrónico institucional
-  const emailEl = document.getElementById('modal-email-link');
-  const contactEl = document.getElementById('modal-contact');
-  if (datos.email && emailEl) {
-    emailEl.href = `mailto:${datos.email}`;
-    emailEl.querySelector('.email-text').textContent = datos.email;
-    contactEl.style.display = 'flex';
+  // Correo electrónico institucional obtenido de Firestore
+  const emailLinkEl = document.getElementById('modal-email-link');
+  const contactEl   = document.getElementById('modal-contact');
+
+  if (datos.email && emailLinkEl && contactEl) {
+    emailLinkEl.href = `mailto:${datos.email}`;
+    const textSpan = emailLinkEl.querySelector('.email-text');
+    if (textSpan) textSpan.textContent = datos.email;
+    contactEl.style.display = 'block';
   } else if (contactEl) {
     contactEl.style.display = 'none';
   }
 }
 
-// =============================================================
-// setModalLoading(loading)
-// Muestra u oculta el indicador de carga de datos dentro del modal.
-// =============================================================
 function setModalLoading(loading) {
   const indicator = document.getElementById('modal-loading');
   if (indicator) {
@@ -196,26 +162,19 @@ function setModalLoading(loading) {
 
 // =============================================================
 // CIERRE DEL MODAL
-// Tres formas de cerrar: botón X, botón "Cerrar", clic en el overlay.
 // =============================================================
 function cerrarModal() {
   modalOverlay?.classList.remove('visible');
   document.body.style.overflow = '';
-
-  // Detener la rotación automática del modelo y liberar recursos
-  // (se reanudará al abrir el modal de nuevo)
-  modalViewerLoaded = false;
 }
 
 document.getElementById('modal-close-btn')?.addEventListener('click', cerrarModal);
 document.getElementById('btn-modal-cancel')?.addEventListener('click', cerrarModal);
 
-// Clic fuera del modal (en el overlay oscuro) → cerrar
 modalOverlay?.addEventListener('click', (e) => {
   if (e.target === modalOverlay) cerrarModal();
 });
 
-// Tecla ESC → cerrar
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && modalOverlay?.classList.contains('visible')) {
     cerrarModal();
@@ -226,6 +185,6 @@ document.addEventListener('keydown', (e) => {
 // INICIALIZACIÓN
 // =============================================================
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('🎓 Portal de Docentes Uniguajira iniciado.');
+  console.log('[Docentes AR] Portal de Docentes Uniguajira iniciado correctamente.');
   initNavegacion();
 });

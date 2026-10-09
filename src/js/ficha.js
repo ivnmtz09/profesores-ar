@@ -41,11 +41,11 @@ function obtenerIdDocente() {
   const id = params.get('id');
 
   if (!id) {
-    console.error('⚠️ No se encontró el parámetro ?id= en la URL');
+    console.error('[AVISO] No se encontró el parámetro ?id= en la URL');
     return null;
   }
 
-  console.log(`📋 ID del docente a cargar: ${id}`);
+  console.log(`[DOCENTE] ID del docente a cargar: ${id}`);
   return id;
 }
 
@@ -80,17 +80,17 @@ async function cargarDatosDocente(id) {
 
     // .exists() nos dice si el documento fue encontrado en Firestore
     if (docSnap.exists()) {
-      console.log('✅ Datos del docente cargados desde Firestore');
+      console.log('[OK] Datos del docente cargados desde Firestore');
       // .data() retorna el objeto con todos los campos del documento
       return { encontrado: true, datos: docSnap.data() };
     } else {
       // El documento no existe en la colección 'docentes'
-      console.warn(`⚠️ No se encontró el docente con ID: "${id}" en Firestore`);
+      console.warn(`[AVISO] No se encontró el docente con ID: "${id}" en Firestore`);
       return { encontrado: false, datos: null };
     }
   } catch (error) {
     // Error de red, permisos, o credenciales mal configuradas
-    console.error('❌ Error al consultar Firestore:', error);
+    console.error('[ERROR] Error al consultar Firestore:', error);
     return { encontrado: false, datos: null, error: error.message };
   }
 }
@@ -117,7 +117,7 @@ function renderizarFicha(datos) {
   document.getElementById('ficha-descripcion').innerHTML =
     `<span class="label">Sobre el docente</span><span class="value">${datos.descripcion || 'Sin descripción disponible.'}</span>`;
 
-  console.log('🎴 Ficha del docente renderizada correctamente');
+  console.log('[FICHA] Ficha del docente renderizada correctamente');
 }
 
 
@@ -141,7 +141,7 @@ function mostrarErrorEnFicha(mensaje) {
   // Mostramos la ficha automáticamente para que el usuario vea el error
   document.getElementById('ficha-overlay').classList.add('visible');
 
-  console.error(`❌ Error en ficha: ${mensaje}`);
+  console.error(`[ERROR] Error en ficha: ${mensaje}`);
 }
 
 
@@ -201,10 +201,10 @@ async function inicializarFicha() {
 
   // --- Paso 3: Renderizar según el resultado ---
   if (resultado.encontrado) {
-    // ✅ El docente existe en Firestore → mostramos sus datos
+    // [OK] El docente existe en Firestore → mostramos sus datos
     renderizarFicha(resultado.datos);
   } else {
-    // ❌ El docente NO existe → mostramos error amigable
+    // [ERROR] El docente NO existe → mostramos error amigable
     const mensajeError = resultado.error
       ? `Error de conexión con la base de datos: ${resultado.error}`
       : `No se encontraron datos para el docente "${id}" en la base de datos.`;
@@ -214,7 +214,7 @@ async function inicializarFicha() {
   // --- Paso 4: Configurar botones ---
   configurarInteraccion();
 
-  console.log('✅ Ficha inicializada correctamente');
+  console.log('[OK] Ficha inicializada correctamente');
   return resultado.encontrado ? resultado.datos : null;
 }
 

@@ -38,7 +38,7 @@ async function inicializarAR() {
     return;
   }
 
-  console.log(`🚀 Iniciando experiencia AR para: ${docenteId}`);
+  console.log(`[INICIO] Iniciando experiencia AR para: ${docenteId}`);
 
   // ---- PASO 2: Definir las rutas de los recursos ----
   // Ahora que movimos todo a src/, las rutas relativas desde ar.html
@@ -100,25 +100,25 @@ async function inicializarAR() {
       loader.load(
         modelPath,
 
-        // ✅ Callback de ÉXITO: el modelo se cargó correctamente
+        // [OK] Callback de ÉXITO: el modelo se cargó correctamente
         (gltf) => {
-          console.log('✅ Modelo 3D cargado correctamente');
+          console.log('[OK] Modelo 3D cargado correctamente');
           resolve(gltf);
         },
 
-        // 📊 Callback de PROGRESO: muestra porcentaje de descarga
+        // [PROGRESO] Callback de PROGRESO: muestra porcentaje de descarga
         (progress) => {
           if (progress.total > 0) {
             const porcentaje = Math.round(
               (progress.loaded / progress.total) * 100
             );
-            console.log(`📦 Cargando modelo: ${porcentaje}%`);
+            console.log(`[CARGA] Cargando modelo: ${porcentaje}%`);
           }
         },
 
-        // ❌ Callback de ERROR: el modelo no se pudo cargar
+        // [ERROR] Callback de ERROR: el modelo no se pudo cargar
         (error) => {
-          console.error('❌ Error al cargar el modelo 3D:', error);
+          console.error('[ERROR] Error al cargar el modelo 3D:', error);
           reject(error);
         }
       );
@@ -191,7 +191,7 @@ async function inicializarAR() {
     let mixer = null;
 
     if (gltf.animations && gltf.animations.length > 0) {
-      console.log(`🎬 El modelo tiene ${gltf.animations.length} animación(es)`);
+      console.log(`[ANIMACION] El modelo tiene ${gltf.animations.length} animación(es)`);
 
       // AnimationMixer: controla las animaciones de un objeto 3D
       mixer = new THREE.AnimationMixer(modelo);
@@ -207,7 +207,7 @@ async function inicializarAR() {
 
     anchor.onTargetFound = () => {
       // ¡La cámara detectó la foto del docente en la tarjeta!
-      console.log('🎯 ¡Target detectado! Mostrando modelo 3D');
+      console.log('[TARGET] ¡Target detectado! Mostrando modelo 3D');
       // Mostramos el botón "Info Docente" para que el usuario
       // pueda abrir la ficha cuando quiera
       document.getElementById('btn-info').classList.remove('hidden');
@@ -215,7 +215,7 @@ async function inicializarAR() {
 
     anchor.onTargetLost = () => {
       // La cámara perdió de vista la imagen del docente
-      console.log('👋 Target perdido');
+      console.log('[PERDIDO] Target perdido');
       // Ocultamos el botón y cerramos la ficha si estaba abierta
       document.getElementById('btn-info').classList.add('hidden');
       document.getElementById('ficha-overlay').classList.remove('visible');
@@ -241,12 +241,12 @@ async function inicializarAR() {
           btnStart.style.opacity = '0.5';
 
           await mindarThree.start();
-          console.log('📸 MindAR iniciado — apunta la cámara a la tarjeta');
+          console.log('[CAMARA] MindAR iniciado — apunta la cámara a la tarjeta');
           
           // Ocultar overlay
           document.getElementById('loading-overlay').classList.add('hidden');
         } catch (startError) {
-          console.error('❌ Error al iniciar cámara o cargar archivo .mind:', startError);
+          console.error('[ERROR] Error al iniciar cámara o cargar archivo .mind:', startError);
           mostrarError('Error: Faltan archivos del docente o permisos de cámara denegados.');
         }
       });
@@ -274,7 +274,7 @@ async function inicializarAR() {
     });
 
   } catch (error) {
-    console.error('❌ Error fatal al inicializar AR (posible error 404 en modelo .glb):', error);
+    console.error('[ERROR] Error fatal al inicializar AR (posible error 404 en modelo .glb):', error);
     mostrarError('El modelo 3D de este docente está en construcción. ¡Se agregará muy pronto!');
   }
 }
@@ -288,19 +288,34 @@ async function inicializarAR() {
 function mostrarError(mensaje) {
   const overlay = document.getElementById('loading-overlay');
   overlay.innerHTML = `
-    <div style="text-align: center; padding: 2rem;">
-      <p style="font-size: 3rem;">😕</p>
-      <h2 style="color: #ff5252;">¡Ups! Algo salió mal</h2>
-      <p style="max-width: 400px; margin: 1rem auto;">${mensaje}</p>
+    <div style="text-align: center; padding: 2.5rem 1.5rem; background: #ffffff; border-radius: 16px; max-width: 420px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 1px solid #e2e8f0;">
+      <div style="width: 56px; height: 56px; margin: 0 auto 1rem; border-radius: 50%; background: #fef2f2; display: flex; align-items: center; justify-content: center; color: #dc2626;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 28px; height: 28px;" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </div>
+      <h2 style="color: #0f172a; font-size: 1.35rem; font-weight: 800; margin-bottom: 0.5rem;">Aviso de Experiencia AR</h2>
+      <p style="max-width: 360px; margin: 0 auto 1.5rem; color: #64748b; font-size: 0.95rem; line-height: 1.5;">${mensaje}</p>
       <a href="index.html#sistemas" style="
-        display: inline-block;
-        margin-top: 1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
         padding: 0.75rem 1.5rem;
-        background: #00bcd4;
+        background: #2563eb;
         color: white;
         text-decoration: none;
-        border-radius: 8px;
-      ">← Volver al inicio</a>
+        font-weight: 600;
+        font-size: 0.92rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      ">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" style="width: 16px; height: 16px;" aria-hidden="true">
+          <path fill-rule="evenodd" d="M17 10a.75.75 0 0 1-.75.75H5.612l4.158 3.96a.75.75 0 1 1-1.04 1.08l-5.5-5.25a.75.75 0 0 1 0-1.08l5.5-5.25a.75.75 0 1 1 1.04 1.08L5.612 9.25H16.25A.75.75 0 0 1 17 10Z" clip-rule="evenodd"/>
+        </svg>
+        Volver a Docentes
+      </a>
     </div>
   `;
 }
@@ -313,10 +328,10 @@ function mostrarError(mensaje) {
 // =============================================================
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('📄 Página AR cargada — inicializando...');
+    console.log('[PAGINA] Página AR cargada — inicializando...');
     inicializarAR();
   });
 } else {
-  console.log('📄 Página AR ya estaba cargada — inicializando...');
+  console.log('[PAGINA] Página AR ya estaba cargada — inicializando...');
   inicializarAR();
 }
