@@ -127,19 +127,6 @@ async function inicializarAR() {
     // ---- PASO 8: Configurar el modelo 3D ----
     const modelo = gltf.scene;
 
-    // Si el docente es "adanud", convertir todo su modelo a dorado
-    if (docenteId === 'adanud') {
-      modelo.traverse((child) => {
-        if (child.isMesh) {
-          child.material = new THREE.MeshStandardMaterial({
-            color: 0xffd700, // Dorado
-            metalness: 0.8,
-            roughness: 0.2
-          });
-        }
-      });
-    }
-
     // ESCALA: ajustamos el tamaño del modelo.
     // MODIFICA ESTOS NÚMEROS HASTA ENCONTRAR EL TAMAÑO PERFECTO
     let currentScale = 3; // Tamaño por defecto (12 era muy grande)
@@ -305,7 +292,7 @@ function mostrarError(mensaje) {
       <p style="font-size: 3rem;">😕</p>
       <h2 style="color: #ff5252;">¡Ups! Algo salió mal</h2>
       <p style="max-width: 400px; margin: 1rem auto;">${mensaje}</p>
-      <a href="index.html" style="
+      <a href="index.html#sistemas" style="
         display: inline-block;
         margin-top: 1rem;
         padding: 0.75rem 1.5rem;

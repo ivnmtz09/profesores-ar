@@ -2,92 +2,378 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <!-- Configuración del viewport para que la página se adapte a móviles -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profesores de Sistemas - Uniguajira</title>
+  <title>Docentes Uniguajira — Experiencia AR</title>
+  <meta name="description" content="Portal de docentes de la Universidad de La Guajira con experiencia de Realidad Aumentada.">
 
-  <!-- Favicon del proyecto -->
+  <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="img/favicon.ico?v=2">
 
-  <!-- Hoja de estilos del proyecto -->
+  <!-- Estilos del proyecto -->
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- model-viewer: componente web de Google para visualización 3D -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 </head>
 <body>
 
   <!-- ============================================================= -->
-  <!-- HEADER: Encabezado con título del proyecto e instrucciones     -->
+  <!-- HEADER INSTITUCIONAL                                          -->
   <!-- ============================================================= -->
   <header>
-    <h1>Profesores de Sistemas</h1>
-    <p>Universidad de La Guajira — Realidad Aumentada</p>
-    <p>
-      Escanea el código QR de una tarjeta o selecciona un docente
-      para ver su modelo 3D en Realidad Aumentada
-    </p>
+    <div class="header-badge" aria-label="Universidad de La Guajira">
+      <!-- Ícono de libro/academia -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M11.7 2.805a.75.75 0 0 1 .6 0A60.65 60.65 0 0 1 22.83 8.72a.75.75 0 0 1-.231 1.337 49.948 49.948 0 0 0-9.902 3.912l-.003.002-.34.18a.75.75 0 0 1-.707 0A50.88 50.88 0 0 0 7.5 12.173v-.224c0-.131.067-.248.172-.311a54.615 54.615 0 0 1 4.653-2.52.75.75 0 0 0-.65-1.352 56.123 56.123 0 0 0-4.78 2.589 1.858 1.858 0 0 0-.859 1.228 49.803 49.803 0 0 0-4.634-1.527.75.75 0 0 1-.231-1.337A60.653 60.653 0 0 1 11.7 2.805Z"/>
+        <path d="M13.06 15.473a48.45 48.45 0 0 1 7.666-3.282c.134 1.414.22 2.843.255 4.284a.75.75 0 0 1-.46.71 47.87 47.87 0 0 0-8.105 4.342.75.75 0 0 1-.832 0 47.87 47.87 0 0 0-8.104-4.342.75.75 0 0 1-.461-.71c.035-1.442.121-2.87.255-4.286.921.304 1.83.634 2.726.99v1.27a1.5 1.5 0 0 0-.14 2.508c-.09.38-.222.753-.397 1.11.452.213.901.434 1.346.66a6.727 6.727 0 0 0 .551-1.607 1.5 1.5 0 0 0 .14-2.67v-.645a48.549 48.549 0 0 1 3.44 1.667 2.25 2.25 0 0 0 2.12 0Z"/>
+      </svg>
+      Universidad de La Guajira
+    </div>
 
+    <h1>Docentes <span>Uniguajira</span></h1>
+    <p class="header-sub">
+      Conoce a los docentes de la universidad en una experiencia interactiva con modelos 3D y Realidad Aumentada.
+    </p>
   </header>
 
   <!-- ============================================================= -->
-  <!-- GALERÍA: Tarjetas de los docentes                              -->
+  <!-- BREADCRUMB DE NAVEGACIÓN                                      -->
+  <!-- (solo visible en la vista de Sistemas)                        -->
   <!-- ============================================================= -->
-  <main class="gallery">
-
-    <!-- Jair -->
-    <article class="card">
-      <img src="img/jair.jpg" alt="Foto del Prof. Jair">
-      <h3>Prof. Jair</h3>
-      <p>Docente de Sistemas</p>
-      <a href="ar.html?id=jair">Ver en AR</a>
-    </article>
-
-    <!-- Robert -->
-    <article class="card">
-      <img src="img/robert.jpg" alt="Prof. Robert">
-      <h3>Prof. Robert</h3>
-      <p>Docente de Sistemas</p>
-      <a href="ar.html?id=robert">Ver en AR</a>
-    </article>
-
-    <!-- Adanud (Adanund in img but adanud.mind in targets) -->
-    <article class="card">
-      <img src="img/adanund.jpg" alt="Prof. Adanud">
-      <h3>Prof. Adanud</h3>
-      <p>Docente de Sistemas</p>
-      <a href="ar.html?id=adanud">Ver en AR</a>
-    </article>
-
-    <!-- Jaider -->
-    <article class="card">
-      <img src="img/jaider.jpg" alt="Prof. Jaider">
-      <h3>Prof. Jaider</h3>
-      <p>Docente de Sistemas</p>
-      <a href="ar.html?id=jaider">Ver en AR</a>
-    </article>
-
-    <!-- Roger -->
-    <article class="card">
-      <img src="img/roger.jpg" alt="Prof. Roger">
-      <h3>Prof. Roger</h3>
-      <p>Docente de Sistemas</p>
-      <a href="ar.html?id=roger">Ver en AR</a>
-    </article>
-
-    <!-- Sandy -->
-    <article class="card">
-      <img src="img/sandy.jpg" alt="Prof. Sandy">
-      <h3>Prof. Sandy</h3>
-      <p>Docente de Sistemas</p>
-      <a href="ar.html?id=sandy">Ver en AR</a>
-    </article>
-
-  </main>
+  <nav class="nav-breadcrumb" id="nav-breadcrumb" aria-label="Ruta de navegación" style="display:none;">
+    <button class="crumb-link" id="crumb-inicio" aria-label="Volver a Programas Académicos">
+      Programas Académicos
+    </button>
+    <span class="crumb-sep" aria-hidden="true">›</span>
+    <span class="crumb-current">Ingeniería de Sistemas</span>
+  </nav>
 
   <!-- ============================================================= -->
-  <!-- FOOTER: Créditos del proyecto                                 -->
+  <!-- SECCIÓN: PROGRAMAS ACADÉMICOS (Carreras)                      -->
+  <!-- ============================================================= -->
+  <section id="section-carreras" aria-label="Programas Académicos">
+    <div class="section-title">Programas Académicos</div>
+    <p class="section-desc">
+      Selecciona un programa para explorar sus docentes con experiencia 3D y Realidad Aumentada.
+    </p>
+
+    <div class="careers-grid" role="list">
+
+      <!-- Ingeniería de Sistemas — ACTIVA -->
+      <article class="career-card active" role="listitem">
+        <div class="career-icon" aria-hidden="true">💻</div>
+        <div class="career-name">Ingeniería de Sistemas</div>
+        <p class="career-meta">6 docentes disponibles</p>
+        <div class="career-footer">
+          <span class="badge badge-active">
+            <!-- Ícono check -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="11" height="11" aria-hidden="true">
+              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd"/>
+            </svg>
+            Disponible
+          </span>
+          <button class="btn-career" id="btn-ir-sistemas" aria-label="Ver docentes de Ingeniería de Sistemas">
+            Ver docentes
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd"/>
+            </svg>
+          </button>
+        </div>
+      </article>
+
+      <!-- Ingeniería Industrial — PRÓXIMAMENTE -->
+      <article class="career-card soon" role="listitem" aria-label="Ingeniería Industrial, próximamente">
+        <div class="career-icon" aria-hidden="true">⚙️</div>
+        <div class="career-name">Ingeniería Industrial</div>
+        <p class="career-meta">Contenido en preparación</p>
+        <div class="career-footer">
+          <span class="badge badge-soon">🕐 Próximamente</span>
+        </div>
+      </article>
+
+      <!-- Ingeniería Civil — PRÓXIMAMENTE -->
+      <article class="career-card soon" role="listitem" aria-label="Ingeniería Civil, próximamente">
+        <div class="career-icon" aria-hidden="true">🏗️</div>
+        <div class="career-name">Ingeniería Civil</div>
+        <p class="career-meta">Contenido en preparación</p>
+        <div class="career-footer">
+          <span class="badge badge-soon">🕐 Próximamente</span>
+        </div>
+      </article>
+
+      <!-- Ingeniería Ambiental — PRÓXIMAMENTE -->
+      <article class="career-card soon" role="listitem" aria-label="Ingeniería Ambiental, próximamente">
+        <div class="career-icon" aria-hidden="true">🌿</div>
+        <div class="career-name">Ingeniería Ambiental</div>
+        <p class="career-meta">Contenido en preparación</p>
+        <div class="career-footer">
+          <span class="badge badge-soon">🕐 Próximamente</span>
+        </div>
+      </article>
+
+      <!-- Administración de Empresas — PRÓXIMAMENTE -->
+      <article class="career-card soon" role="listitem" aria-label="Administración de Empresas, próximamente">
+        <div class="career-icon" aria-hidden="true">📊</div>
+        <div class="career-name">Administración de Empresas</div>
+        <p class="career-meta">Contenido en preparación</p>
+        <div class="career-footer">
+          <span class="badge badge-soon">🕐 Próximamente</span>
+        </div>
+      </article>
+
+      <!-- Contaduría Pública — PRÓXIMAMENTE -->
+      <article class="career-card soon" role="listitem" aria-label="Contaduría Pública, próximamente">
+        <div class="career-icon" aria-hidden="true">🧾</div>
+        <div class="career-name">Contaduría Pública</div>
+        <p class="career-meta">Contenido en preparación</p>
+        <div class="career-footer">
+          <span class="badge badge-soon">🕐 Próximamente</span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- SECCIÓN: DIRECTORIO DE DOCENTES — INGENIERÍA DE SISTEMAS      -->
+  <!-- ============================================================= -->
+  <section id="section-sistemas" aria-label="Docentes de Ingeniería de Sistemas">
+    <div class="sistemas-header">
+      <div class="sistemas-info">
+        <span class="sistemas-count">
+          <!-- Ícono de personas -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="13" height="13" aria-hidden="true">
+            <path d="M7 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM14.5 9a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5ZM1.615 16.428a1.224 1.224 0 0 1-.01-.138 6.25 6.25 0 0 1 12.4-1.608 4.5 4.5 0 0 1 5.106 2.685.75.75 0 0 1-.706 1.033H16.5a4.498 4.498 0 0 1-1.475-.248 6.22 6.22 0 0 1-.888-.4A6.25 6.25 0 0 1 1.615 16.428Z"/>
+          </svg>
+          6 docentes · Ingeniería de Sistemas
+        </span>
+        <div class="section-title">Docentes del Programa</div>
+        <p class="section-desc" style="margin-bottom:0;">
+          Selecciona un docente para conocerlo y explorar su modelo 3D.
+        </p>
+      </div>
+    </div>
+
+    <main class="gallery" role="list">
+
+      <!-- ====== Jair Salcedo ====== -->
+      <article class="card" role="listitem">
+        <div class="card-img-wrapper">
+          <img src="img/jair.jpg" alt="Foto del Prof. Jair Salcedo" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3>Prof. Jair Salcedo</h3>
+          <p class="card-role">Docente de Sistemas</p>
+        </div>
+        <div class="card-footer">
+          <button class="btn-ver" data-id="jair" aria-label="Ver perfil del Prof. Jair Salcedo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+              <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41Z" clip-rule="evenodd"/>
+            </svg>
+            Ver Docente
+          </button>
+        </div>
+      </article>
+
+      <!-- ====== Robert Quintero ====== -->
+      <article class="card" role="listitem">
+        <div class="card-img-wrapper">
+          <img src="img/robert.jpg" alt="Foto del Prof. Robert Quintero" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3>Prof. Robert Quintero</h3>
+          <p class="card-role">Docente de Sistemas</p>
+        </div>
+        <div class="card-footer">
+          <button class="btn-ver" data-id="robert" aria-label="Ver perfil del Prof. Robert Quintero">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+              <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41Z" clip-rule="evenodd"/>
+            </svg>
+            Ver Docente
+          </button>
+        </div>
+      </article>
+
+      <!-- ====== Jaider Quintero ====== -->
+      <article class="card" role="listitem">
+        <div class="card-img-wrapper">
+          <img src="img/jaider.jpg" alt="Foto del Prof. Jaider Quintero" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3>Prof. Jaider Quintero</h3>
+          <p class="card-role">Docente de Sistemas</p>
+        </div>
+        <div class="card-footer">
+          <button class="btn-ver" data-id="jaider" aria-label="Ver perfil del Prof. Jaider Quintero">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+              <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41Z" clip-rule="evenodd"/>
+            </svg>
+            Ver Docente
+          </button>
+        </div>
+      </article>
+
+      <!-- ====== Roger Pimienta ====== -->
+      <article class="card" role="listitem">
+        <div class="card-img-wrapper">
+          <img src="img/roger.jpg" alt="Foto del Prof. Roger Pimienta" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3>Prof. Roger Pimienta</h3>
+          <p class="card-role">Docente de Sistemas</p>
+        </div>
+        <div class="card-footer">
+          <button class="btn-ver" data-id="roger" aria-label="Ver perfil del Prof. Roger Pimienta">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+              <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41Z" clip-rule="evenodd"/>
+            </svg>
+            Ver Docente
+          </button>
+        </div>
+      </article>
+
+      <!-- ====== Sandy Romero ====== -->
+      <article class="card" role="listitem">
+        <div class="card-img-wrapper">
+          <img src="img/sandy.jpg" alt="Foto de la Prof. Sandy Romero" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3>Prof. Sandy Romero</h3>
+          <p class="card-role">Docente de Sistemas</p>
+        </div>
+        <div class="card-footer">
+          <button class="btn-ver" data-id="sandy" aria-label="Ver perfil de la Prof. Sandy Romero">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+              <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41Z" clip-rule="evenodd"/>
+            </svg>
+            Ver Docente
+          </button>
+        </div>
+      </article>
+
+      <!-- ====== Dir. Adanud Meza — tarjeta dorada ====== -->
+      <article class="card card-gold" role="listitem">
+        <div class="card-img-wrapper">
+          <img src="img/adanund.jpg" alt="Foto del Dir. Adanud Meza" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3>Dir. Adanud Meza</h3>
+          <p class="card-role">Director del Programa</p>
+        </div>
+        <div class="card-footer">
+          <button class="btn-ver" data-id="adanud" aria-label="Ver perfil del Dir. Adanud Meza">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+              <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41Z" clip-rule="evenodd"/>
+            </svg>
+            Ver Docente
+          </button>
+        </div>
+      </article>
+
+    </main>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- MODAL: DETALLE DEL DOCENTE + VISOR 3D                         -->
+  <!-- ============================================================= -->
+  <div id="modal-docente" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-nombre">
+
+    <div class="modal" tabindex="-1">
+
+      <!-- Cabecera -->
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-program-badge">Ingeniería de Sistemas · Uniguajira</span>
+          <h2 class="modal-name" id="modal-nombre">Cargando...</h2>
+        </div>
+        <button class="modal-close" id="modal-close-btn" aria-label="Cerrar modal">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
+            <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Correo institucional (desde Firestore) -->
+      <div class="modal-contact" id="modal-contact" style="display:none;">
+        <a id="modal-email-link" href="#" class="modal-email-link" aria-label="Enviar correo al docente">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M3 4a2 2 0 0 0-2 2v1.161l8.441 4.221a1.25 1.25 0 0 0 1.118 0L19 7.162V6a2 2 0 0 0-2-2H3Z"/>
+            <path d="m19 8.839-7.77 3.885a2.75 2.75 0 0 1-2.46 0L1 8.839V14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.839Z"/>
+          </svg>
+          <span class="email-text"></span>
+        </a>
+      </div>
+
+      <!-- Indicador de carga Firestore -->
+      <div id="modal-loading" class="modal-data-loading" style="display:none; padding: 0.5rem 1.5rem;">
+        <div class="inline-spinner" aria-hidden="true"></div>
+        Cargando información...
+      </div>
+
+      <!-- Divisor -->
+      <div class="modal-divider" role="separator" aria-hidden="true"></div>
+
+      <!-- Visor 3D Interactivo -->
+      <div class="modal-viewer-section">
+        <p class="modal-viewer-label">Modelo 3D Interactivo</p>
+        <div class="viewer-container">
+          <model-viewer
+            id="viewer-3d"
+            alt="Modelo 3D interactivo del docente"
+            camera-controls
+            auto-rotate
+            auto-rotate-delay="800"
+            rotation-per-second="30deg"
+            interaction-prompt="auto"
+            environment-image="neutral"
+            shadow-intensity="1"
+            exposure="1"
+            loading="eager"
+            reveal="auto"
+            ar
+            ar-modes="webxr scene-viewer quick-look"
+          ></model-viewer>
+          <span class="viewer-hint" aria-hidden="true">👆 Arrastra para rotar · 🤏 Pellizca para hacer zoom</span>
+        </div>
+      </div>
+
+      <!-- Acciones -->
+      <div class="modal-actions">
+        <a id="btn-ir-ar" href="#" class="btn-ar" aria-label="Ver este docente en Realidad Aumentada">
+          <!-- Ícono de cámara / AR -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 9a3.75 3.75 0 1 0 0 7.5A3.75 3.75 0 0 0 12 9Z"/>
+            <path fill-rule="evenodd" d="M9.344 3.071a49.52 49.52 0 0 1 5.312 0c.967.052 1.83.585 2.332 1.39l.821 1.317c.24.383.645.643 1.11.71.386.054.77.113 1.152.177 1.432.239 2.429 1.493 2.429 2.909V18a3 3 0 0 1-3 3h-15a3 3 0 0 1-3-3V9.574c0-1.416.997-2.67 2.429-2.909.382-.064.766-.123 1.151-.178a1.56 1.56 0 0 0 1.11-.71l.822-1.315a2.942 2.942 0 0 1 2.332-1.39ZM6.75 12.75a5.25 5.25 0 1 1 10.5 0 5.25 5.25 0 0 1-10.5 0Zm12-1.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd"/>
+          </svg>
+          Ver en Realidad Aumentada
+        </a>
+        <button class="btn-modal-cancel" id="btn-modal-cancel" aria-label="Cerrar sin ir a AR">
+          Cerrar
+        </button>
+      </div>
+
+    </div><!-- /.modal -->
+  </div><!-- /.modal-overlay -->
+
+  <!-- ============================================================= -->
+  <!-- FOOTER                                                        -->
   <!-- ============================================================= -->
   <footer>
-    <p>Proyecto IoT — Universidad de La Guajira — 2026 - 2</p>
+    <p>Proyecto IoT · Universidad de La Guajira · Ingeniería de Sistemas · 2026</p>
   </footer>
+
+  <!-- ============================================================= -->
+  <!-- SCRIPTS                                                       -->
+  <!-- firebase-config.js exporta 'db' para ser usado en home.js    -->
+  <!-- ============================================================= -->
+  <script type="module" src="js/firebase-config.js?v=1.3"></script>
+  <script type="module" src="js/home.js?v=1.3"></script>
 
 </body>
 </html>

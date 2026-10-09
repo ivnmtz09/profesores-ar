@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Colección de docentes: solo lectura pública (la app no escribe desde el cliente)
+    match /docentes/{docenteId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Cualquier otro documento: denegado por defecto
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+  }
+}
