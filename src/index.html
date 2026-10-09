@@ -10,12 +10,32 @@
   <link rel="icon" type="image/x-icon" href="img/favicon.ico?v=2">
 
   <!-- Estilos con cache-busting -->
-  <link rel="stylesheet" href="css/style.css?v=2.2">
+  <link rel="stylesheet" href="css/style.css?v=2.3">
 
   <!-- Componente oficial Google model-viewer para renderizado 3D -->
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 </head>
 <body>
+
+  <!-- ============================================================= -->
+  <!-- SCREEN LOADER INSTITUCIONAL                                   -->
+  <!-- ============================================================= -->
+  <div id="screen-loader" class="screen-loader" aria-label="Cargando portal institucional" role="status">
+    <div class="loader-content">
+      <div class="loader-badge-ring">
+        <svg class="loader-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M11.7 2.805a.75.75 0 0 1 .6 0A60.65 60.65 0 0 1 22.83 8.72a.75.75 0 0 1-.231 1.337 49.948 49.948 0 0 0-9.902 3.912l-.003.002-.34.18a.75.75 0 0 1-.707 0A50.88 50.88 0 0 0 7.5 12.173v-.224c0-.131.067-.248.172-.311a54.615 54.615 0 0 1 4.653-2.52.75.75 0 0 0-.65-1.352 56.123 56.123 0 0 0-4.78 2.589 1.858 1.858 0 0 0-.859 1.228 49.803 49.803 0 0 0-4.634-1.527.75.75 0 0 1-.231-1.337A60.653 60.653 0 0 1 11.7 2.805Z"/>
+          <path d="M13.06 15.473a48.45 48.45 0 0 1 7.666-3.282c.134 1.414.22 2.843.255 4.284a.75.75 0 0 1-.46.71 47.87 47.87 0 0 0-8.105 4.342.75.75 0 0 1-.832 0 47.87 47.87 0 0 0-8.104-4.342.75.75 0 0 1-.461-.71c.035-1.442.121-2.87.255-4.286.921.304 1.83.634 2.726.99v1.27a1.5 1.5 0 0 0-.14 2.508c-.09.38-.222.753-.397 1.11.452.213.901.434 1.346.66a6.727 6.727 0 0 0 .551-1.607 1.5 1.5 0 0 0 .14-2.67v-.645a48.549 48.549 0 0 1 3.44 1.667 2.25 2.25 0 0 0 2.12 0Z"/>
+        </svg>
+      </div>
+      <h2 class="loader-title">Universidad de La Guajira</h2>
+      <p class="loader-subtitle">Directorio Docente · Realidad Aumentada & Modelos 3D</p>
+      <div class="loader-progress-track" aria-hidden="true">
+        <div class="loader-progress-bar"></div>
+      </div>
+      <span class="loader-status" id="loader-status-text">Cargando directorio docente...</span>
+    </div>
+  </div>
 
   <!-- ============================================================= -->
   <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL                             -->
@@ -96,12 +116,36 @@
         <p class="section-subtitle">
           Selecciona un programa para acceder al directorio de docentes y sus modelos tridimensionales.
         </p>
+
+        <!-- Filtros interactivos por facultad -->
+        <div class="faculty-filters" role="tablist" aria-label="Filtrar programas por facultad">
+          <button class="filter-btn active" data-filter="todas" role="tab" aria-selected="true">
+            Todas las Facultades
+          </button>
+          <button class="filter-btn" data-filter="ingenieria" role="tab" aria-selected="false">
+            Ingeniería
+          </button>
+          <button class="filter-btn" data-filter="economicas" role="tab" aria-selected="false">
+            Ciencias Económicas
+          </button>
+          <button class="filter-btn" data-filter="sociales" role="tab" aria-selected="false">
+            Ciencias Sociales
+          </button>
+          <button class="filter-btn" data-filter="educacion" role="tab" aria-selected="false">
+            Educación
+          </button>
+          <button class="filter-btn" data-filter="basicas" role="tab" aria-selected="false">
+            Ciencias Básicas
+          </button>
+        </div>
       </div>
 
       <div class="careers-grid" role="list">
 
+        <!-- ================= FACULTAD DE INGENIERÍA ================= -->
+
         <!-- 1. Ingeniería de Sistemas (ACTIVO) -->
-        <article class="career-card card-active" role="listitem">
+        <article class="career-card card-active" data-facultad="ingenieria" role="listitem">
           <div class="career-icon-box" aria-hidden="true">
             <!-- Icono Código / Terminal -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -110,14 +154,14 @@
             </svg>
           </div>
           <h3 class="career-name">Ingeniería de Sistemas</h3>
-          <p class="career-meta">Facultad de Ingeniería · 6 docentes registrados</p>
+          <p class="career-meta">Facultad de Ingeniería · 6 de 38 docentes modelados</p>
           <div class="career-footer">
             <span class="status-badge badge-available">
               <!-- Icono Check -->
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd"/>
               </svg>
-              Disponible
+              Disponible (Fase 1)
             </span>
             <button class="btn-enter-career" id="btn-ir-sistemas" aria-label="Ver docentes de Ingeniería de Sistemas">
               Ver docentes
@@ -130,7 +174,7 @@
         </article>
 
         <!-- 2. Ingeniería Industrial (PRÓXIMAMENTE) -->
-        <article class="career-card card-inactive" role="listitem">
+        <article class="career-card card-inactive" data-facultad="ingenieria" role="listitem">
           <div class="career-icon-box" aria-hidden="true">
             <!-- Icono Engranaje / Procesos -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -139,7 +183,7 @@
             </svg>
           </div>
           <h3 class="career-name">Ingeniería Industrial</h3>
-          <p class="career-meta">Facultad de Ingeniería · En digitalización</p>
+          <p class="career-meta">Facultad de Ingeniería · En digitalización 3D</p>
           <div class="career-footer">
             <span class="status-badge badge-pending">
               <!-- Icono Reloj -->
@@ -152,7 +196,7 @@
         </article>
 
         <!-- 3. Ingeniería Civil (PRÓXIMAMENTE) -->
-        <article class="career-card card-inactive" role="listitem">
+        <article class="career-card card-inactive" data-facultad="ingenieria" role="listitem">
           <div class="career-icon-box" aria-hidden="true">
             <!-- Icono Edificio / Infraestructura -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -166,7 +210,7 @@
             </svg>
           </div>
           <h3 class="career-name">Ingeniería Civil</h3>
-          <p class="career-meta">Facultad de Ingeniería · En digitalización</p>
+          <p class="career-meta">Facultad de Ingeniería · En digitalización 3D</p>
           <div class="career-footer">
             <span class="status-badge badge-pending">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -178,7 +222,7 @@
         </article>
 
         <!-- 4. Ingeniería Ambiental (PRÓXIMAMENTE) -->
-        <article class="career-card card-inactive" role="listitem">
+        <article class="career-card card-inactive" data-facultad="ingenieria" role="listitem">
           <div class="career-icon-box" aria-hidden="true">
             <!-- Icono Hoja / Ecología -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -187,7 +231,7 @@
             </svg>
           </div>
           <h3 class="career-name">Ingeniería Ambiental</h3>
-          <p class="career-meta">Facultad de Ingeniería · En digitalización</p>
+          <p class="career-meta">Facultad de Ingeniería · En digitalización 3D</p>
           <div class="career-footer">
             <span class="status-badge badge-pending">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -198,8 +242,30 @@
           </div>
         </article>
 
-        <!-- 5. Administración de Empresas (PRÓXIMAMENTE) -->
-        <article class="career-card card-inactive" role="listitem">
+        <!-- 5. Ingeniería Mecánica (PRÓXIMAMENTE) -->
+        <article class="career-card card-inactive" data-facultad="ingenieria" role="listitem">
+          <div class="career-icon-box" aria-hidden="true">
+            <!-- Icono Llave / Mecánica -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+            </svg>
+          </div>
+          <h3 class="career-name">Ingeniería Mecánica</h3>
+          <p class="career-meta">Facultad de Ingeniería · En digitalización 3D</p>
+          <div class="career-footer">
+            <span class="status-badge badge-pending">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v4.59l3.28 1.96a.75.75 0 1 0 .77-1.28l-2.55-1.52V6.75Z" clip-rule="evenodd"/>
+              </svg>
+              Próximamente
+            </span>
+          </div>
+        </article>
+
+        <!-- ================= CIENCIAS ECONÓMICAS Y ADMINISTRATIVAS ================= -->
+
+        <!-- 6. Administración de Empresas (PRÓXIMAMENTE) -->
+        <article class="career-card card-inactive" data-facultad="economicas" role="listitem">
           <div class="career-icon-box" aria-hidden="true">
             <!-- Icono Maletín / Negocios -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -208,7 +274,7 @@
             </svg>
           </div>
           <h3 class="career-name">Administración de Empresas</h3>
-          <p class="career-meta">Facultad de Ciencias Económicas · En digitalización</p>
+          <p class="career-meta">Ciencias Económicas · En digitalización 3D</p>
           <div class="career-footer">
             <span class="status-badge badge-pending">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -219,8 +285,8 @@
           </div>
         </article>
 
-        <!-- 6. Contaduría Pública (PRÓXIMAMENTE) -->
-        <article class="career-card card-inactive" role="listitem">
+        <!-- 7. Contaduría Pública (PRÓXIMAMENTE) -->
+        <article class="career-card card-inactive" data-facultad="economicas" role="listitem">
           <div class="career-icon-box" aria-hidden="true">
             <!-- Icono Gráfico / Finanzas -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -230,13 +296,287 @@
             </svg>
           </div>
           <h3 class="career-name">Contaduría Pública</h3>
-          <p class="career-meta">Facultad de Ciencias Económicas · En digitalización</p>
+          <p class="career-meta">Ciencias Económicas · En digitalización 3D</p>
           <div class="career-footer">
             <span class="status-badge badge-pending">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v4.59l3.28 1.96a.75.75 0 1 0 .77-1.28l-2.55-1.52V6.75Z" clip-rule="evenodd"/>
               </svg>
               Próximamente
+            </span>
+          </div>
+        </article>
+
+        <!-- 8. Negocios Internacionales (PRÓXIMAMENTE) -->
+        <article class="career-card card-inactive" data-facultad="economicas" role="listitem">
+          <div class="career-icon-box" aria-hidden="true">
+            <!-- Icono Globo / Comercio Internacional -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+          </div>
+          <h3 class="career-name">Negocios Internacionales</h3>
+          <p class="career-meta">Ciencias Económicas · En digitalización 3D</p>
+          <div class="career-footer">
+            <span class="status-badge badge-pending">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v4.59l3.28 1.96a.75.75 0 1 0 .77-1.28l-2.55-1.52V6.75Z" clip-rule="evenodd"/>
+              </svg>
+              Próximamente
+            </span>
+          </div>
+        </article>
+
+        <!-- 9. Administración Turística y Hotelera (PRÓXIMAMENTE) -->
+        <article class="career-card card-inactive" data-facultad="economicas" role="listitem">
+          <div class="career-icon-box" aria-hidden="true">
+            <!-- Icono Brújula / Turismo -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+            </svg>
+          </div>
+          <h3 class="career-name">Admón. Turística y Hotelera</h3>
+          <p class="career-meta">Ciencias Económicas · En digitalización 3D</p>
+          <div class="career-footer">
+            <span class="status-badge badge-pending">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v4.59l3.28 1.96a.75.75 0 1 0 .77-1.28l-2.55-1.52V6.75Z" clip-rule="evenodd"/>
+              </svg>
+              Próximamente
+            </span>
+          </div>
+        </article>
+
+        <!-- 10. Economía (PRÓXIMAMENTE) -->
+        <article class="career-card card-inactive" data-facultad="economicas" role="listitem">
+          <div class="career-icon-box" aria-hidden="true">
+            <!-- Icono Tendencia / Mercado -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+              <polyline points="17 6 23 6 23 12"></polyline>
+            </svg>
+          </div>
+          <h3 class="career-name">Economía</h3>
+          <p class="career-meta">Ciencias Económicas · En digitalización 3D</p>
+          <div class="career-footer">
+            <span class="status-badge badge-pending">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v4.59l3.28 1.96a.75.75 0 1 0 .77-1.28l-2.55-1.52V6.75Z" clip-rule="evenodd"/>
+              </svg>
+              Próximamente
+            </span>
+          </div>
+        </article>
+
+        <!-- ================= CIENCIAS SOCIALES Y HUMANAS ================= -->
+
+        <!-- 11. Derecho (PRÓXIMAMENTE) -->
+        <article class="career-card card-inactive" data-facultad="sociales" role="listitem">
+          <div class="career-icon-box" aria-hidden="true">
+            <!-- Icono Balanza / Justicia -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
+              <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
+              <path d="M7 21h10"></path>
+              <path d="M12 3v18"></path>
+              <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path>
+            </svg>
+          </div>
+          <h3 class="career-name">Derecho</h3>
+          <p class="career-meta">Ciencias Sociales y Humanas · En digitalización 3D</p>
+          <div class="career-footer">
+            <span class="status-badge badge-pending">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v4.59l3.28 1.96a.75.75 0 1 0 .77-1.28l-2.55-1.52V6.75Z" clip-rule="evenodd"/>
+              </svg>
+              Próximamente
+            </span>
+          </div>
+        </article>
+
+        <!-- 12. Psicología (PRÓXIMAMENTE) -->
+        <article class="career-card card-inactive" data-facultad="sociales" role="listitem">
+          <div class="career-icon-box" aria-hidden="true">
+            <!-- Icono Mente / Psicología -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04Z"></path>
+              <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04Z"></path>
+            </svg>
+          </div>
+          <h3 class="career-name">Psicología</h3>
+          <p class="career-meta">Ciencias Sociales y Humanas · En digitalización 3D</p>
+          <div class="career-footer">
+            <span class="status-badge badge-pending">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v4.59l3.28 1.96a.75.75 0 1 0 .77-1.28l-2.55-1.52V6.75Z" clip-rule="evenodd"/>
+              </svg>
+              Próximamente
+            </span>
+          </div>
+        </article>
+
+        <!-- 13. Trabajo Social (PRÓXIMAMENTE) -->
+        <article class="career-card card-inactive" data-facultad="sociales" role="listitem">
+          <div class="career-icon-box" aria-hidden="true">
+            <!-- Icono Comunidad / Personas -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <h3 class="career-name">Trabajo Social</h3>
+          <p class="career-meta">Ciencias Sociales y Humanas · En digitalización 3D</p>
+          <div class="career-footer">
+            <span class="status-badge badge-pending">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v4.59l3.28 1.96a.75.75 0 1 0 .77-1.28l-2.55-1.52V6.75Z" clip-rule="evenodd"/>
+              </svg>
+              Próximamente
+            </span>
+          </div>
+        </article>
+
+        <!-- 14. Comunicación Social y Periodismo (PRÓXIMAMENTE) -->
+        <article class="career-card card-inactive" data-facultad="sociales" role="listitem">
+          <div class="career-icon-box" aria-hidden="true">
+            <!-- Icono Micrófono / Medios -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+              <line x1="12" y1="19" x2="12" y2="23"></line>
+              <line x1="8" y1="23" x2="16" y2="23"></line>
+            </svg>
+          </div>
+          <h3 class="career-name">Comunicación Social</h3>
+          <p class="career-meta">Ciencias Sociales y Humanas · En digitalización 3D</p>
+          <div class="career-footer">
+            <span class="status-badge badge-pending">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v4.59l3.28 1.96a.75.75 0 1 0 .77-1.28l-2.55-1.52V6.75Z" clip-rule="evenodd"/>
+              </svg>
+              Próximamente
+            </span>
+          </div>
+        </article>
+
+        <!-- ================= CIENCIAS DE LA EDUCACIÓN ================= -->
+
+        <!-- 15. Licenciatura en Etnoeducación (PRÓXIMAMENTE) -->
+        <article class="career-card card-inactive" data-facultad="educacion" role="listitem">
+          <div class="career-icon-box" aria-hidden="true">
+            <!-- Icono Libro / Cultura -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+          </div>
+          <h3 class="career-name">Lic. en Etnoeducación</h3>
+          <p class="career-meta">Ciencias de la Educación · En digitalización 3D</p>
+          <div class="career-footer">
+            <span class="status-badge badge-pending">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v4.59l3.28 1.96a.75.75 0 1 0 .77-1.28l-2.55-1.52V6.75Z" clip-rule="evenodd"/>
+              </svg>
+              Próximamente
+            </span>
+          </div>
+        </article>
+
+        <!-- 16. Licenciatura en Educación Infantil (PRÓXIMAMENTE) -->
+        <article class="career-card card-inactive" data-facultad="educacion" role="listitem">
+          <div class="career-icon-box" aria-hidden="true">
+            <!-- Icono Corazón / Vocación Educativa -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+          </div>
+          <h3 class="career-name">Lic. en Educación Infantil</h3>
+          <p class="career-meta">Ciencias de la Educación · En digitalización 3D</p>
+          <div class="career-footer">
+            <span class="status-badge badge-pending">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v4.59l3.28 1.96a.75.75 0 1 0 .77-1.28l-2.55-1.52V6.75Z" clip-rule="evenodd"/>
+              </svg>
+              Próximamente
+            </span>
+          </div>
+        </article>
+
+        <!-- 17. Licenciatura en Educación Física (PRÓXIMAMENTE) -->
+        <article class="career-card card-inactive" data-facultad="educacion" role="listitem">
+          <div class="career-icon-box" aria-hidden="true">
+            <!-- Icono Actividad / Deporte -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M8.56 2.75c4.37 6 6 9.42 8 17.72"></path>
+              <path d="M17.73 7.72c-2.43 3.6-5.4 6-12.73 8.28"></path>
+            </svg>
+          </div>
+          <h3 class="career-name">Lic. en Educación Física</h3>
+          <p class="career-meta">Ciencias de la Educación · En digitalización 3D</p>
+          <div class="career-footer">
+            <span class="status-badge badge-pending">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v4.59l3.28 1.96a.75.75 0 1 0 .77-1.28l-2.55-1.52V6.75Z" clip-rule="evenodd"/>
+              </svg>
+              Próximamente
+            </span>
+          </div>
+        </article>
+
+        <!-- ================= CIENCIAS BÁSICAS Y APLICADAS ================= -->
+
+        <!-- 18. Biología (PRÓXIMAMENTE) -->
+        <article class="career-card card-inactive" data-facultad="basicas" role="listitem">
+          <div class="career-icon-box" aria-hidden="true">
+            <!-- Icono ADN / Biología -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 15c6.667-6 13.333 0 20-6"></path>
+              <path d="M9 22c1.798-1.998 2.518-3.995 2.807-5.993"></path>
+              <path d="M15 2c-1.798 1.998-2.518 3.995-2.807 5.993"></path>
+              <path d="m17 6-2.5-2.5"></path>
+              <path d="m14 8-4-4"></path>
+              <path d="m7 18 2.5 2.5"></path>
+              <path d="m10 16 4 4"></path>
+            </svg>
+          </div>
+          <h3 class="career-name">Biología</h3>
+          <p class="career-meta">Ciencias Básicas y Aplicadas · En digitalización 3D</p>
+          <div class="career-footer">
+            <span class="status-badge badge-pending">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v4.59l3.28 1.96a.75.75 0 1 0 .77-1.28l-2.55-1.52V6.75Z" clip-rule="evenodd"/>
+              </svg>
+              Próximamente
+            </span>
+          </div>
+        </article>
+
+        <!-- ================= TARJETA DE EXPANSIÓN INSTITUCIONAL ================= -->
+
+        <!-- 19. Expansión Continua de Programas y Sedes -->
+        <article class="career-card card-expansion" data-facultad="todas" role="listitem">
+          <div class="career-icon-box" aria-hidden="true">
+            <!-- Icono Plus / Red Institucional -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="16"></line>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
+          </div>
+          <h3 class="career-name">Más Programas Académicos</h3>
+          <p class="career-meta">Sedes Riohacha, Maicao, Fonseca, Manaure y Villanueva</p>
+          <div class="career-footer">
+            <span class="status-badge badge-expansion">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v4.59l3.28 1.96a.75.75 0 1 0 .77-1.28l-2.55-1.52V6.75Z" clip-rule="evenodd"/>
+              </svg>
+              +24 programas y posgrados en fila 3D
             </span>
           </div>
         </article>
@@ -268,6 +608,17 @@
         </div>
       </div>
 
+      <!-- Banner informativo de fase de digitalización docente -->
+      <div class="banner-fase" role="note">
+        <div class="banner-fase-badge">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          Fase 1 Activa
+        </div>
+        <p class="banner-fase-text">
+          <strong>6 de 38 docentes registrados con modelos 3D y AR.</strong> El catálogo del cuerpo docente y directivo de Ingeniería de Sistemas continúa en digitalización progresiva.
+        </p>
+      </div>
+
       <main class="gallery" role="list">
 
         <!-- Docente 1: Prof. Jair Salcedo -->
@@ -281,10 +632,10 @@
           </div>
           <div class="card-footer">
             <button class="btn-ver" data-id="jair" aria-label="Ver docente Prof. Jair Salcedo">
-              <!-- Icono Ojo -->
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
-                <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41Z" clip-rule="evenodd"/>
+              <!-- Icono Ojo Mejorado -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M2.036 12.322a1.012 1.012 0 0 1 0-.696C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"/>
+                <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
               </svg>
               Ver Docente
             </button>
@@ -302,9 +653,10 @@
           </div>
           <div class="card-footer">
             <button class="btn-ver" data-id="robert" aria-label="Ver docente Prof. Robert Quintero">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
-                <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41Z" clip-rule="evenodd"/>
+              <!-- Icono Ojo Mejorado -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M2.036 12.322a1.012 1.012 0 0 1 0-.696C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"/>
+                <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
               </svg>
               Ver Docente
             </button>
@@ -322,9 +674,10 @@
           </div>
           <div class="card-footer">
             <button class="btn-ver" data-id="jaider" aria-label="Ver docente Prof. Jaider Quintero">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
-                <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41Z" clip-rule="evenodd"/>
+              <!-- Icono Ojo Mejorado -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M2.036 12.322a1.012 1.012 0 0 1 0-.696C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"/>
+                <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
               </svg>
               Ver Docente
             </button>
@@ -342,9 +695,10 @@
           </div>
           <div class="card-footer">
             <button class="btn-ver" data-id="roger" aria-label="Ver docente Prof. Roger Pimienta">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
-                <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41Z" clip-rule="evenodd"/>
+              <!-- Icono Ojo Mejorado -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M2.036 12.322a1.012 1.012 0 0 1 0-.696C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"/>
+                <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
               </svg>
               Ver Docente
             </button>
@@ -362,9 +716,10 @@
           </div>
           <div class="card-footer">
             <button class="btn-ver" data-id="sandy" aria-label="Ver docente Prof. Sandy Romero">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
-                <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41Z" clip-rule="evenodd"/>
+              <!-- Icono Ojo Mejorado -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M2.036 12.322a1.012 1.012 0 0 1 0-.696C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"/>
+                <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
               </svg>
               Ver Docente
             </button>
@@ -388,12 +743,40 @@
           </div>
           <div class="card-footer">
             <button class="btn-ver" data-id="adanud" aria-label="Ver docente Dir. Adanud Meza">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
-                <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41Z" clip-rule="evenodd"/>
+              <!-- Icono Ojo Mejorado -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M2.036 12.322a1.012 1.012 0 0 1 0-.696C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"/>
+                <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
               </svg>
               Ver Docente
             </button>
+          </div>
+        </article>
+
+        <!-- Tarjeta Informativa: Docentes en proceso de digitalización -->
+        <article class="card card-docentes-pendientes" role="listitem">
+          <div class="card-img-wrapper placeholder-img-wrapper">
+            <div class="scanner-mesh-box" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <line x1="19" y1="8" x2="19" y2="14"></line>
+                <line x1="22" y1="11" x2="16" y2="11"></line>
+              </svg>
+              <div class="scanner-scan-line"></div>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">+32 Docentes en Proceso</h3>
+            <span class="card-role">Departamento de Sistemas · Uniguajira</span>
+          </div>
+          <div class="card-footer">
+            <div class="badge-en-produccion">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v4.59l3.28 1.96a.75.75 0 1 0 .77-1.28l-2.55-1.52V6.75Z" clip-rule="evenodd"/>
+              </svg>
+              Modelado 3D & Targets AR en Captura
+            </div>
           </div>
         </article>
 
@@ -510,8 +893,8 @@
   <!-- ============================================================= -->
   <!-- SCRIPTS MODULARES CON CACHE BUSTING                           -->
   <!-- ============================================================= -->
-  <script type="module" src="js/firebase-config.js?v=2.2"></script>
-  <script type="module" src="js/home.js?v=2.2"></script>
+  <script type="module" src="js/firebase-config.js?v=2.3"></script>
+  <script type="module" src="js/home.js?v=2.3"></script>
 
 </body>
 </html>
